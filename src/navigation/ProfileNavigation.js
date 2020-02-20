@@ -1,10 +1,10 @@
 import { createStackNavigator } from 'react-navigation-stack';
 
 import { screens } from './screens';
-import ProfileScreen from '../screens/Profile/ProfileScreen';
+import ProfileScreenView from '../screens/Profile/ProfileScreenContainer';
 
 const routes = {
-  [screens.Profile]: ProfileScreen,
+  [screens.Profile]: ProfileScreenView,
 };
 
 export default createStackNavigator(routes, {});

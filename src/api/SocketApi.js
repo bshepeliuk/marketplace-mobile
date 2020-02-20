@@ -24,9 +24,11 @@ class SocketApi {
   }
 
   handleMessages(handler) {
-    this.socket.on('message', (message) => {
-      handler(JSON.parse(message));
-    });
+    try {
+      this.socket.on('message', (message) => {
+        handler(JSON.parse(message));
+      });
+    } catch (error) {}
   }
 }
 

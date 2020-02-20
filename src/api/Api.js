@@ -3,18 +3,20 @@ import axios from 'axios';
 import SocketApi from './SocketApi';
 import AuthToken from '../helpers/AuthToken';
 
+const baseURL = 'https://apiko-marketplace-api-2019.herokuapp.com';
+
 export const urls = {
-  login: '/api/auth/login',
-  register: '/api/auth/register',
-  viewer: '/api/account/user',
-  getProducts: '/api/products/latest',
-  addProduct: '/api/products',
-  uploadImages: '/api/upload/images',
-  products: '/api/products',
-  chats: '/api/chats',
-  fetchSaved: '/api/products/saved',
-  currentUser: '/api/users',
-  searchProduct: '/api/products/search',
+  login: `${baseURL}/auth/login`,
+  register: `${baseURL}/auth/register`,
+  viewer: `${baseURL}/account/user`,
+  getProducts: `${baseURL}/products/latest`,
+  addProduct: `${baseURL}/products`,
+  uploadImages: `${baseURL}/upload/images`,
+  products: `${baseURL}/products`,
+  chats: `${baseURL}/chats`,
+  fetchSaved: `${baseURL}/products/saved`,
+  currentUser: `${baseURL}/users`,
+  searchProduct: `${baseURL}/products/search`,
 };
 
 export const Viewer = {
@@ -32,10 +34,6 @@ export const Viewer = {
 export const Auth = {
   _token: null,
 
-  get isLoggedIn() {
-    return !!this._token;
-  },
-
   setToken(token) {
     this._token = token;
     this._storeToken(token);
@@ -45,36 +43,40 @@ export const Auth = {
   async init() {
     try {
       const token = await AuthToken.get();
-      this._token = JSON.parse(token);
+
+      this._token = token;
+      this.setToken(token);
       this._setTokenToAxios(this._token);
+
       SocketApi.init(this._token);
     } catch (error) {
-      console.error(error);
+      throw error;
     }
   },
 
-  login(body) {
-    return axios.post(urls.login, body);
+  login({ email, password }) {
+    return axios.post(urls.login, { email, password });
   },
 
-  register(body) {
-    return axios.post(urls.register, body);
+  register({ email, fullName, password }) {
+    return axios.post(urls.register, { email, fullName, password });
   },
 
   logout() {
     this._token = null;
+
     try {
       AuthToken.remove();
     } catch (error) {
-      console.error(error);
+      throw error;
     }
   },
 
   async _storeToken() {
     try {
-      await AuthToken(this._token);
+      await AuthToken.set(this._token);
     } catch (error) {
-      console.error(error);
+      throw error;
     }
   },
 
@@ -150,7 +152,3 @@ export const Messages = {
     );
   },
 };
-
-export function init() {
-  Auth.init();
-}

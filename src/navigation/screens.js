@@ -1,5 +1,6 @@
 export const screens = {
   Auth: 'Auth',
+  AuthLoading: 'AuthLoading',
   Login: 'Login',
   Register: 'Register',
 

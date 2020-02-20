@@ -13,10 +13,11 @@ export const init = () => async (dispatch) => {
   try {
     dispatch(actions.initialization.start());
 
-    Api.init();
+    await Api.Auth.init();
 
     dispatch(viewerOperations.fetchViewer());
     dispatch(actions.initialization.success());
+
     dispatch(subscribeToSocket());
   } catch (error) {
     dispatch(
