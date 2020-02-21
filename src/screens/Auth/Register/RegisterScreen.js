@@ -14,7 +14,7 @@ function RegisterScreen({ initValues, handleRegister }) {
     <KeyboardAwareScrollView
       contentContainerStyle={s.scrollViewWrap}
       resetScrollToCoords={{ x: 0, y: 0 }}
-      extraHeight={80}
+      extraScrollHeight={25}
       scrollEnabled
       enableOnAndroid
       enableAutoAutomaticScroll
@@ -86,7 +86,7 @@ function RegisterScreen({ initValues, handleRegister }) {
             </View>
 
             <View style={s.authFooter}>
-              <Text>Have an account?</Text>
+              <Text style={s.authBottomTxt}>Have an account?</Text>
               <TouchableOpacity
                 style={s.goToLogin}
                 onPress={() => NavigationService.navigateToLogin()}

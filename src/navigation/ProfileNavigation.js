@@ -7,4 +7,4 @@ const routes = {
   [screens.Profile]: ProfileScreenView,
 };
 
-export default createStackNavigator(routes, {});
+export default createStackNavigator(routes);

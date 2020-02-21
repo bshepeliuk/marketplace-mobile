@@ -1,10 +1,10 @@
 import { createStackNavigator } from 'react-navigation-stack';
 
 import { screens } from './screens';
-import BrowseScreen from '../screens/Browse/BrowseScreenContainer';
+import AddProductScreen from '../screens/AddProduct/AddProductScreenContainer';
 
 const routes = {
-  [screens.Browse]: BrowseScreen,
+  [screens.AddNewProduct]: AddProductScreen,
 };
 
 export default createStackNavigator(routes);

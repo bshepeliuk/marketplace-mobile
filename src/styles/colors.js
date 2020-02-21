@@ -1,9 +1,10 @@
 const colors = {
-  grey: '#bdc3c7',
+  grey: '#D6D6D6',
   primaryGreen: '#349A89',
   white: '#fff',
   transparent: 'transparent',
-  red: 'red',
+  error: '#FF4060',
+  authBackgroudndColor: '#E5E5E5',
 };
 
 export default colors;

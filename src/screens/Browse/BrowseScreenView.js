@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-function BrowseScreen() {
+function BrowseScreenView() {
   return (
     <View>
       <Text>Browse</Text>
@@ -9,4 +9,4 @@ function BrowseScreen() {
   );
 }
 
-export default BrowseScreen;
+export default BrowseScreenView;

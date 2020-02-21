@@ -16,6 +16,10 @@ class NavigationService {
     );
   }
 
+  goBack() {
+    this.navigator.dispatch(NavigationActions.back());
+  }
+
   navigateToRegister() {
     this.navigate(screens.Register);
   }
@@ -26,6 +30,10 @@ class NavigationService {
 
   navigateToApp() {
     this.navigate(screens.MainApp);
+  }
+
+  navigateToCreateProduct() {
+    this.navigate(screens.AddNewProduct);
   }
 }
 

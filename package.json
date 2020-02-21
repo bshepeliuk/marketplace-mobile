@@ -9,6 +9,7 @@
     "remotedev": "remotedev --hostname=localhost --port=8000"
   },
   "dependencies": {
+    "@expo/vector-icons": "^10.0.6",
     "@letapp/redux-actions": "^3.0.1",
     "@react-native-community/masked-view": "^0.1.6",
     "axios": "^0.19.2",

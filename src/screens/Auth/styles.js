@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 80,
+    paddingTop: 28,
+    backgroundColor: colors.authBackgroudndColor,
   },
   form: {
     flex: 1,
@@ -15,15 +16,20 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   inputsWrap: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
   },
   input: {
     borderColor: colors.grey,
     borderWidth: 1,
-    marginBottom: 10,
+    marginBottom: 4,
     borderRadius: 4,
-    height: 40,
-    paddingHorizontal: 10,
+    height: 44,
+    paddingLeft: 16,
+    paddingRight: 50,
+    paddingVertical: 10,
+    backgroundColor: colors.white,
+    fontSize: 16,
+    lineHeight: 24,
   },
   authLoader: {
     flex: 1,
@@ -42,17 +48,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   loginBtn: {
-    height: 40,
-    width: 100,
-    borderRadius: 20,
+    height: 44,
+    borderRadius: 44,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.primaryGreen,
   },
   registerBtn: {
-    height: 40,
-    width: 100,
-    borderRadius: 20,
+    height: 44,
+    borderRadius: 44,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.primaryGreen,
@@ -79,17 +87,46 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontWeight: 'bold',
   },
-
+  authBottomTxt: {
+    color: colors.grey,
+  },
   green: {
     borderColor: colors.primaryGreen,
+    borderWidth: 2,
   },
   red: {
-    borderColor: colors.red,
+    borderColor: colors.error,
+    borderWidth: 2,
   },
   scrollViewWrap: {
     flexGrow: 1,
-    paddingTop: 80,
+    paddingTop: 28,
     justifyContent: 'space-between',
+    backgroundColor: colors.authBackgroudndColor,
+  },
+
+  label: {
+    flexDirection: 'row',
+    alignSelf: 'flex-start',
+    fontSize: 16,
+    lineHeight: 24,
+    color: colors.primaryGreen,
+  },
+  txtRed: {
+    color: colors.error,
+  },
+  errorMsg: {
+    fontSize: 12,
+    lineHeight: 18,
+    color: colors.error,
+  },
+  inputWrap: {
+    marginBottom: 10,
+  },
+  alertIcon: {
+    position: 'absolute',
+    bottom: 28,
+    right: 16,
   },
 });
 

@@ -63,7 +63,9 @@ function LoginScreen({ initValues, handleLogin }) {
             </View>
 
             <View style={s.authFooter}>
-              <Text>Don&apos;t have an account?</Text>
+              <Text style={s.authBottomTxt}>
+                Don&apos;t have an account?
+              </Text>
               <TouchableOpacity
                 style={s.goToRegister}
                 onPress={() => NavigationService.navigateToRegister()}
