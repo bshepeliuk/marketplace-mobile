@@ -86,10 +86,24 @@ export const Auth = {
 };
 
 export const Image = {
-  upload(img) {
+  upload(imgObj) {
+    const localUri = imgObj.uri;
+    const filename = localUri.split('/').pop();
+    const match = /\.(\w+)$/.exec(filename);
+    const type = match ? `image/${match[1]}` : `image`;
     const data = new FormData();
-    data.append('image', img);
-    return axios.post(urls.uploadImages, data);
+
+    data.append('image', {
+      type,
+      uri: localUri,
+      name: filename,
+    });
+
+    return axios.post(urls.uploadImages, data, {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    });
   },
 };
 

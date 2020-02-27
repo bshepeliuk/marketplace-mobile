@@ -9,11 +9,15 @@
     "remotedev": "remotedev --hostname=localhost --port=8000"
   },
   "dependencies": {
+    "@expo/react-native-action-sheet": "^3.5.0",
     "@expo/vector-icons": "^10.0.6",
     "@letapp/redux-actions": "^3.0.1",
     "@react-native-community/masked-view": "^0.1.6",
     "axios": "^0.19.2",
     "expo": "^35.0.0",
+    "expo-camera": "~7.0.0",
+    "expo-image-picker": "~7.0.0",
+    "expo-permissions": "~7.0.0",
     "expo-secure-store": "7.0.0",
     "formik": "^2.1.4",
     "normalizr": "^3.5.0",

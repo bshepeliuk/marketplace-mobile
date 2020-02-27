@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import { Provider } from 'react-redux';
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 
 import Navigator from './src/navigation';
 import { globalStyles } from './src/styles';
@@ -14,9 +15,11 @@ function App() {
 
   return (
     <View style={globalStyles.fillAll}>
-      <Provider store={store}>
-        <Navigator />
-      </Provider>
+      <ActionSheetProvider>
+        <Provider store={store}>
+          <Navigator />
+        </Provider>
+      </ActionSheetProvider>
     </View>
   );
 }
