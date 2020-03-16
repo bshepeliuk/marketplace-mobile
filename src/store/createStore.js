@@ -1,8 +1,26 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'remote-redux-devtools';
 import thunk from 'redux-thunk';
+import { persistStore, persistReducer } from 'redux-persist';
+import { AsyncStorage } from 'react-native';
 
 import rootReducer from '../modules';
+
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+  blacklist: [
+    'app',
+    'chats',
+    'messages',
+    'products',
+    'viewer',
+    'entities',
+    'auth',
+  ],
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const composeEnhancers = composeWithDevTools({
   realtime: true,
@@ -13,8 +31,10 @@ const composeEnhancers = composeWithDevTools({
 const middleware = [thunk];
 
 const store = createStore(
-  rootReducer,
+  persistedReducer,
   composeEnhancers(applyMiddleware(...middleware)),
 );
 
-export { store };
+const persistor = persistStore(store);
+
+export { store, persistor };

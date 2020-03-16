@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import T from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -7,7 +7,7 @@ import CloseModalBtn from './components/CloseModalBtn/CloseModalBtn';
 import CreateProductBtn from './components/CreateProductBtn/CreateProductBtn';
 import SegmentedControlTab from './components/SegmentedControlPriceTab/SegmentedControlPriceTab';
 import Input from './components/Input/Input';
-import { ProductFormContext } from '../../contexts';
+import { ProductFormContext } from '../../context';
 import LoadPhotosSection from './components/LoadPhotosSection/LoadPhotosSection';
 import s from './styles';
 
@@ -21,6 +21,7 @@ function AddProductScreenView({
   touched,
   errors,
   isImageLoading,
+  onChooseLocation,
 }) {
   const propsForNestedComponents = {
     handleChange,
@@ -75,12 +76,14 @@ function AddProductScreenView({
             </View>
           </View>
 
-          <Text style={s.label}>Location</Text>
-          <Input
-            style={s.input}
-            fieldName="location"
-            placeholder="Location"
-          />
+          <TouchableOpacity
+            onPress={onChooseLocation}
+            style={s.chooseLocationBtn}
+          >
+            <Text>
+              {values.location ? values.location : 'Location'}
+            </Text>
+          </TouchableOpacity>
         </View>
       </ProductFormContext.Provider>
     </KeyboardAwareScrollView>
@@ -108,6 +111,7 @@ AddProductScreenView.propTypes = {
   hasPrice: T.bool,
   onChoosePrice: T.func,
   isImageLoading: T.bool,
+  onChooseLocation: T.func,
   // formik props
   handleChange: T.func,
   handleBlur: T.func,

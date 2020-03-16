@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { TextInput, Text } from 'react-native';
 import T from 'prop-types';
-import { ProductFormContext } from '../../../../contexts';
+
+import { ProductFormContext } from '../../../../context';
 
 function Input({ fieldName, placeholder, style, ...props }) {
   const {

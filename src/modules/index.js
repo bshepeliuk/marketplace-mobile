@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
+import { AsyncStorage } from 'react-native';
+import { persistReducer } from 'redux-persist';
 
 import app from './app';
 import auth from './auth';
@@ -7,6 +9,13 @@ import products from './products';
 import entities from './entities';
 import chats from './chats';
 import messages from './messages';
+import search from './search';
+
+const searchPersistConfig = {
+  key: 'search',
+  storage: AsyncStorage,
+  whitelist: ['prevLocation'],
+};
 
 export default combineReducers({
   app,
@@ -16,4 +25,5 @@ export default combineReducers({
   entities,
   chats,
   messages,
+  search: persistReducer(searchPersistConfig, search),
 });

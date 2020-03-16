@@ -10,9 +10,12 @@ class NavigationService {
     this.navigator = ref;
   }
 
-  navigate(route) {
+  navigate(route, props) {
     this.navigator.dispatch(
-      NavigationActions.navigate({ routeName: route }),
+      NavigationActions.navigate({
+        routeName: route,
+        params: { ...props },
+      }),
     );
   }
 
@@ -34,6 +37,9 @@ class NavigationService {
 
   navigateToCreateProduct() {
     this.navigate(screens.AddNewProduct);
+  }
+  navigateToChooseLocation(onChangeLocation) {
+    this.navigate(screens.ChooseLocation, { onChangeLocation });
   }
 }
 

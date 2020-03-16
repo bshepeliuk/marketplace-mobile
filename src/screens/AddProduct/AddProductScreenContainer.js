@@ -14,6 +14,7 @@ import AddProductScreenView from './AddProductScreenView';
 import { productsOperations } from '../../modules/products';
 import Api from '../../api';
 import { validation } from '../../helpers';
+import { NavigationService } from '../../services';
 
 const mapStateToProps = (state) => ({
   isLoading: state.products.newProduct.isLoading,
@@ -74,6 +75,9 @@ const enhancer = compose(
         throw error;
       }
     },
+    onChangeLocation: (props) => (value) => {
+      props.setFieldValue('location', value);
+    },
   }),
   withHandlers({
     onOpenCamera: (props) => async () => {
@@ -133,6 +137,11 @@ const enhancer = compose(
         default:
           break;
       }
+    },
+    onChooseLocation: (props) => () => {
+      NavigationService.navigateToChooseLocation(
+        props.onChangeLocation,
+      );
     },
   }),
 

@@ -10,6 +10,7 @@ export const screens = {
   Inbox: 'Inbox',
   Saved: 'Saved',
   AddNewProduct: 'AddNewProduct',
+  ChooseLocation: 'ChooseLocation',
 
   App: 'App',
   MainApp: 'MainApp',

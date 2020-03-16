@@ -10,7 +10,7 @@ import {
 import s from './styles';
 import { colors } from '../../../../styles';
 import { useSelectPhoto } from '../../../../hooks/useSelectPhoto';
-import { ProductFormContext } from '../../../../contexts';
+import { ProductFormContext } from '../../../../context';
 
 function LoadPhotosSection() {
   const { isImageLoading, onChooseAction, values } = useContext(

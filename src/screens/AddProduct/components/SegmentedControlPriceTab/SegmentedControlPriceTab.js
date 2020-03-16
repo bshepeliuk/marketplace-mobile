@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 import s from './styles';
-import { ProductFormContext } from '../../../../contexts';
+import { ProductFormContext } from '../../../../context';
 
 function SegmentedControlPriceTab() {
   const { onChoosePrice } = useContext(ProductFormContext);

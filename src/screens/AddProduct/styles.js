@@ -119,6 +119,16 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0,
     borderRightWidth: 0,
   },
+  chooseLocationBtn: {
+    height: 64,
+    marginTop: 24,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderTopColor: colors.grey,
+    borderBottomColor: colors.grey,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
 export default styles;
