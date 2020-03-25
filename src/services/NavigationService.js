@@ -10,13 +10,8 @@ class NavigationService {
     this.navigator = ref;
   }
 
-  navigate(route, props) {
-    this.navigator.dispatch(
-      NavigationActions.navigate({
-        routeName: route,
-        params: { ...props },
-      }),
-    );
+  navigate(route) {
+    this.navigator.dispatch(NavigationActions.navigate(route));
   }
 
   goBack() {
@@ -24,22 +19,33 @@ class NavigationService {
   }
 
   navigateToRegister() {
-    this.navigate(screens.Register);
+    this.navigate({ routeName: screens.Register });
   }
 
   navigateToLogin() {
-    this.navigate(screens.Login);
+    this.navigate({ routeName: screens.Login });
   }
 
   navigateToApp() {
-    this.navigate(screens.MainApp);
+    this.navigate({ routeName: screens.MainApp });
   }
 
   navigateToCreateProduct() {
-    this.navigate(screens.AddNewProduct);
+    this.navigate({ routeName: screens.AddNewProduct });
   }
+
   navigateToChooseLocation(onChangeLocation) {
-    this.navigate(screens.ChooseLocation, { onChangeLocation });
+    this.navigate({
+      routeName: screens.ChooseLocation,
+      params: { onChangeLocation },
+    });
+  }
+
+  navigateToProduct(productId) {
+    this.navigate({
+      routeName: screens.Product,
+      params: { productId },
+    });
   }
 }
 

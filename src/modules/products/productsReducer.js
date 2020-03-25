@@ -6,6 +6,9 @@ export const INIT_STATE = {
     isError: false,
     isLoading: false,
     error: null,
+    isErrorMore: false,
+    isLoadingMore: false,
+    errorMore: null,
     hasMore: true,
     items: [],
   },
@@ -40,8 +43,6 @@ export const INIT_STATE = {
     items: [],
     offset: 0,
   },
-
-  offset: 0,
 };
 
 export default handleActions(
@@ -62,10 +63,8 @@ export default handleActions(
       latestProducts: {
         ...state.latestProducts,
         isLoading: false,
-        hasMore: action.payload.result.length > 0 || false,
         items: action.payload.result,
       },
-      offset: 0,
     }),
     [actions.latestProducts.error]: (state, action) => ({
       ...state,
@@ -243,6 +242,7 @@ export default handleActions(
       ...state,
       ownProducts: {
         ...state.ownProducts,
+        isLoading: false,
         isError: true,
         error: action.payload,
       },
@@ -252,17 +252,18 @@ export default handleActions(
       ...state,
       latestProducts: {
         ...state.latestProducts,
+        isLoading: false,
+        isLoadingMore: true,
       },
     }),
     [actions.moreProducts.success]: (
       state,
-      { payload: { result, offset } },
+      { payload: { result } },
     ) => ({
       ...state,
-      offset,
       latestProducts: {
         ...state.latestProducts,
-        hasMore: result.length > 0 || false,
+        isLoadingMore: false,
         items: [...state.latestProducts.items, ...result],
       },
     }),
@@ -270,9 +271,9 @@ export default handleActions(
       ...state,
       latestProducts: {
         ...state.latestProducts,
-        isError: true,
-        isLoading: false,
-        error: action.payload,
+        isErrorMore: true,
+        isLoadingMore: false,
+        errorMore: action.payload,
       },
     }),
     // search products

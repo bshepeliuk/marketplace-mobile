@@ -1,4 +1,5 @@
 import { normalize } from 'normalizr';
+
 import * as actions from './productsActions';
 import Api, { schemas } from '../../api';
 import { productsSelectors } from '.';
@@ -116,7 +117,7 @@ export const removeFromFavorites = (productId) => async (
   }
 };
 
-export const fetchUserProducts = (userId) => async (dispatch) => {
+export const fetchOwnProducts = (userId) => async (dispatch) => {
   try {
     dispatch(actions.userProducts.start());
 
@@ -138,16 +139,20 @@ export const fetchUserProducts = (userId) => async (dispatch) => {
   }
 };
 
-export const fetchMoreProducts = (offset) => async (dispatch) => {
+export const fetchMoreProducts = () => async (dispatch, getState) => {
+  const { items, isLoadingMore } = getState().products.latestProducts;
+
+  if (isLoadingMore) return;
+
   try {
     dispatch(actions.moreProducts.start());
 
-    const { data } = await Api.Products.getMoreProducts(offset);
+    const { data } = await Api.Products.getMoreProducts({
+      offset: items.length,
+    });
     const { result, entities } = normalize(data, schemas.ProductList);
 
-    dispatch(
-      actions.moreProducts.success({ result, entities, offset }),
-    );
+    dispatch(actions.moreProducts.success({ result, entities }));
   } catch (error) {
     dispatch(actions.moreProducts.error({ message: error.message }));
   }

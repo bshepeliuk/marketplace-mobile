@@ -21,7 +21,7 @@ const routes = {
         return (
           <MaterialIcons
             name="search"
-            size={25}
+            size={32}
             color={focused ? colors.primaryGreen : colors.grey}
           />
         );
@@ -39,7 +39,7 @@ const routes = {
         return (
           <FontAwesome
             name="bookmark-o"
-            size={25}
+            size={32}
             color={focused ? colors.primaryGreen : colors.grey}
           />
         );
@@ -74,7 +74,7 @@ const routes = {
         return (
           <MaterialIcons
             name="inbox"
-            size={25}
+            size={32}
             color={focused ? colors.primaryGreen : colors.grey}
           />
         );
@@ -93,7 +93,7 @@ const routes = {
         return (
           <FontAwesome
             name="user-circle-o"
-            size={25}
+            size={32}
             color={focused ? colors.primaryGreen : colors.grey}
           />
         );

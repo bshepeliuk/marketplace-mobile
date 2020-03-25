@@ -7,6 +7,7 @@ export const screens = {
 
   Profile: 'Profile',
   Browse: 'Browse',
+  Product: 'Product',
   Inbox: 'Inbox',
   Saved: 'Saved',
   AddNewProduct: 'AddNewProduct',

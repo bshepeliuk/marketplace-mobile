@@ -108,9 +108,15 @@ export const Image = {
 };
 
 export const Products = {
-  getMoreProducts(offset) {
-    return axios.get(`${urls.getProducts}?offset=${offset}&limit=20`);
+  getMoreProducts({ offset, limit = 20 }) {
+    return axios.get(urls.getProducts, {
+      params: {
+        offset,
+        limit,
+      },
+    });
   },
+
   getLatestProducts() {
     return axios.get(urls.getProducts);
   },
@@ -119,7 +125,7 @@ export const Products = {
     return axios.get(`${urls.products}/${id}`);
   },
   getUserProducts(userId) {
-    return axios.get(`/api/users/${userId}/products`);
+    return axios.get(`${urls.currentUser}/${userId}/products`);
   },
 
   add(product) {

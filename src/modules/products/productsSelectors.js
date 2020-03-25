@@ -1,11 +1,11 @@
 import { createSelector } from 'reselect';
-import { chunk } from '../../helpers/chunk';
 
 const getProductsEntities = (state) => state.entities.products;
 const getUsersEntities = (state) => state.entities.users;
 const getlatestIds = (state) => state.products.latestProducts.items;
 const getSavedIds = (state) => state.products.savedProducts.items;
-const getSetOwnProducts = (state) => state.products.ownProducts.items;
+const getSetOwnProductsIds = (state) =>
+  state.products.ownProducts.items;
 const getFoundProdIds = (state) => state.products.foundProducts.items;
 
 export const getLatest = createSelector(
@@ -39,10 +39,9 @@ export const getSavedProducts = createSelector(
 );
 
 export const getOwnProducts = createSelector(
-  [getProductsEntities, getSetOwnProducts],
-  (entities, products) => {
-    const prod = chunk(products);
-    return prod.map((items) => items.map((id) => entities[id]));
+  [getProductsEntities, getSetOwnProductsIds],
+  (entities, ids) => {
+    return ids.map((id) => entities[id]);
   },
 );
 
