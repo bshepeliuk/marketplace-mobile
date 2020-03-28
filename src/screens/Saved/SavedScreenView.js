@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text, View } from 'react-native';
 import T from 'prop-types';
 
 import ProductList from '../../components/Products/ProductList';
@@ -9,16 +8,17 @@ function SavedScreenView({
   products,
   isLoading,
   fetchSavedProducts,
+  favoriteSwitcher,
 }) {
   return (
-    <View style={s.container}>
-      <Text>Saved products</Text>
+    <>
       <ProductList
         isLoading={isLoading}
         items={products}
         fetchItems={fetchSavedProducts}
+        favoriteSwitcher={favoriteSwitcher}
       />
-    </View>
+    </>
   );
 }
 
@@ -32,6 +32,7 @@ SavedScreenView.propTypes = {
   ),
   isLoading: T.bool,
   fetchSavedProducts: T.func,
+  favoriteSwitcher: T.func,
 };
 
 export default SavedScreenView;

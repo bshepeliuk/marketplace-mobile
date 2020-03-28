@@ -3,23 +3,24 @@ import { colors } from '../../styles';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginHorizontal: 8,
-    marginVertical: 8,
+    paddingHorizontal: 8,
   },
   product: {
     width: '49%',
-    height: 220,
+    height: 210,
     borderWidth: 1,
     borderColor: colors.grey,
     borderRadius: 10,
+    marginTop: 8,
+    backgroundColor: colors.white,
   },
   loader: {
     flex: 1,
     marginTop: 15,
-    marginBottom: 28,
+    marginBottom: 30,
   },
   productPhoto: {
     resizeMode: 'cover',
@@ -30,11 +31,14 @@ const styles = StyleSheet.create({
   footer: {
     marginHorizontal: 14,
     marginVertical: 10,
+    paddingBottom: 12,
   },
   priceWrap: {
-    marginTop: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  priceTxt: {
+    fontWeight: 'bold',
   },
 });
 

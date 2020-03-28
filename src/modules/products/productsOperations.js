@@ -2,7 +2,8 @@ import { normalize } from 'normalizr';
 
 import * as actions from './productsActions';
 import Api, { schemas } from '../../api';
-import { productsSelectors } from '.';
+
+import * as productsSelectors from './productsSelectors';
 
 export const fetchLatestProducts = () => async (dispatch) => {
   try {
@@ -100,6 +101,7 @@ export const removeFromFavorites = (productId) => async (
     getState(),
     productId,
   );
+
   const updProduct = { ...oldProduct, saved: false };
 
   try {
@@ -127,13 +129,7 @@ export const fetchOwnProducts = (userId) => async (dispatch) => {
       schemas.ProductList,
     );
 
-    dispatch(
-      actions.userProducts.success({
-        result,
-        entities,
-        totalCount: data.count,
-      }),
-    );
+    dispatch(actions.userProducts.success({ result, entities }));
   } catch (error) {
     dispatch(actions.userProducts.error({ message: error.message }));
   }

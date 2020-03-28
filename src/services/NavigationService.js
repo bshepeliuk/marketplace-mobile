@@ -41,10 +41,10 @@ class NavigationService {
     });
   }
 
-  navigateToProduct(productId) {
+  navigateToProduct(product) {
     this.navigate({
       routeName: screens.Product,
-      params: { productId },
+      params: { ...product },
     });
   }
 }

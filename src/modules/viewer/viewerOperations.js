@@ -1,15 +1,17 @@
+import { normalize } from 'normalizr';
+
 import * as actions from './viewerActions';
-import Api from '../../api';
+import Api, { schemas } from '../../api';
 
 export const fetchViewer = () => async (dispatch) => {
   try {
-    dispatch(actions.viewer.start());
+    dispatch(actions.getViewer.start());
 
     const res = await Api.Viewer.get();
 
-    dispatch(actions.viewer.success(res.data));
+    dispatch(actions.getViewer.success(res.data));
   } catch (error) {
-    dispatch(actions.viewer.error({ message: error.message }));
+    dispatch(actions.getViewer.error({ message: error.message }));
   }
 };
 
@@ -25,14 +27,23 @@ export const updateViewerInfo = (viewer) => async (dispatch) => {
   }
 };
 
-export const fetchCurrentUser = (userId) => async (dispatch) => {
+export const fetchProductOwner = (ownerId) => async (dispatch) => {
   try {
-    dispatch(actions.currentUser.start());
+    dispatch(actions.getProductOwner.start());
 
-    const res = await Api.Viewer.getCurrentUser(userId);
+    const res = await Api.Products.getOwner(ownerId);
+    const { result, entities } = normalize(res.data, schemas.User);
 
-    dispatch(actions.currentUser.success(res.data));
+    dispatch(
+      actions.getProductOwner.success({
+        user: res.data,
+        result,
+        entities,
+      }),
+    );
   } catch (error) {
-    dispatch(actions.currentUser.error({ message: error.message }));
+    dispatch(
+      actions.getProductOwner.error({ message: error.message }),
+    );
   }
 };

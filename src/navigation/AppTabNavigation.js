@@ -1,6 +1,10 @@
 import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
+import {
+  MaterialIcons,
+  FontAwesome,
+  Ionicons,
+} from '@expo/vector-icons';
 import { Text, View } from 'react-native';
 
 import { screens } from './screens';
@@ -21,7 +25,7 @@ const routes = {
         return (
           <MaterialIcons
             name="search"
-            size={32}
+            size={28}
             color={focused ? colors.primaryGreen : colors.grey}
           />
         );
@@ -39,7 +43,7 @@ const routes = {
         return (
           <FontAwesome
             name="bookmark-o"
-            size={32}
+            size={28}
             color={focused ? colors.primaryGreen : colors.grey}
           />
         );
@@ -55,10 +59,10 @@ const routes = {
     navigationOptions: {
       tabBarIcon: () => {
         return (
-          <MaterialIcons
+          <Ionicons
             style={s.addProductIcon}
-            name="add-circle"
-            size={56}
+            name="ios-add-circle"
+            size={84}
             color={colors.primaryGreen}
           />
         );
@@ -74,7 +78,7 @@ const routes = {
         return (
           <MaterialIcons
             name="inbox"
-            size={32}
+            size={28}
             color={focused ? colors.primaryGreen : colors.grey}
           />
         );
@@ -93,7 +97,7 @@ const routes = {
         return (
           <FontAwesome
             name="user-circle-o"
-            size={32}
+            size={28}
             color={focused ? colors.primaryGreen : colors.grey}
           />
         );
@@ -108,4 +112,13 @@ const routes = {
 export default createBottomTabNavigator(routes, {
   initialRoute: screens.BrowseTab,
   tabBarComponent: (props) => <TabBarComponent {...props} />,
+
+  tabBarOptions: {
+    style: {
+      height: 54,
+      paddingTop: 8,
+      paddingBottom: 5,
+      borderTopWidth: 0,
+    },
+  },
 });

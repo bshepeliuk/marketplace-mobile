@@ -6,6 +6,10 @@ import {
   productsOperations,
   productsSelectors,
 } from '../../modules/products';
+import {
+  withFavoriteSwitcher,
+  favoriteSwitcherOperations,
+} from '../../helpers/withFavoriteSwitcher';
 
 const mapStateToProps = (state) => ({
   products: productsSelectors.getSavedProducts(state),
@@ -13,6 +17,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
+  ...favoriteSwitcherOperations,
   fetchSavedProducts: productsOperations.fetchSavedProducts,
 };
 
@@ -23,6 +28,7 @@ const enhancer = compose(
       this.props.fetchSavedProducts();
     },
   }),
+  withFavoriteSwitcher, // adding favoriteSwitcher method
 );
 
 export default enhancer(SavedScreenView);

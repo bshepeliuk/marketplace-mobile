@@ -3,78 +3,98 @@ import * as actions from './viewerActions';
 import * as authActions from '../auth/authActions';
 
 export const INIT_STATE = {
-  fetchViewer: {
+  viewer: {
+    isError: false,
+    isLoading: false,
+    error: null,
+    user: null,
+  },
+  users: {
     isError: false,
     isLoading: false,
     error: null,
   },
-  user: null,
 };
 
 export default handleActions(
   {
-    [actions.viewer.start]: (state) => ({
+    [actions.getViewer.start]: (state) => ({
       ...state,
-      fetchViewer: {
-        ...state.fetchViewer,
+      viewer: {
+        ...state.viewer,
         isLoading: true,
       },
     }),
     [combineActions(
-      actions.viewer.success,
+      actions.getViewer.success,
       authActions.login.success,
     )]: (state, action) => ({
       ...state,
-      fetchViewer: {
-        ...state.fetchViewer,
+      viewer: {
+        ...state.viewer,
         error: null,
         isError: false,
         isLoading: false,
+        user: action.payload,
       },
-      user: action.payload,
     }),
-    [actions.viewer.error]: (state, action) => ({
-      fetchViewer: {
-        ...state.fetchViewer,
+    [actions.getViewer.error]: (state, action) => ({
+      viewer: {
+        ...state.viewer,
         isLoading: false,
         isError: true,
         error: action.payload,
+        user: null,
       },
-      user: null,
     }),
     // update user account
     [actions.updateViewer.start]: (state) => ({
       ...state,
-      fetchViewer: {
-        ...state.fetchViewer,
+      viewer: {
+        ...state.viewer,
         isLoading: true,
       },
     }),
     [actions.updateViewer.success]: (state, action) => ({
       ...state,
-      fetchViewer: {
-        ...state.fetchViewer,
+      viewer: {
+        ...state.viewer,
         isLoading: false,
+        user: action.payload,
       },
-      user: action.payload,
     }),
     [actions.updateViewer.error]: (state, action) => ({
-      fetchViewer: {
+      viewer: {
         ...state.fetchViewer,
         isLoading: false,
         isError: true,
         error: action.payload,
+        user: null,
       },
-      user: null,
     }),
     // fetch current user
-    [actions.currentUser.success]: (state, action) => ({
+    [actions.getProductOwner.start]: (state) => ({
       ...state,
-      fetchViewer: {
-        ...state.fetchViewer,
+      users: {
+        ...state.users,
+        isLoading: true,
+      },
+    }),
+    [actions.getProductOwner.success]: (state) => ({
+      ...state,
+      users: {
+        ...state.users,
         isLoading: false,
       },
-      user: action.payload,
+    }),
+    [actions.getProductOwner.error]: (state, action) => ({
+      ...state,
+      users: {
+        ...state.users,
+        isLoading: false,
+        isError: true,
+        error: action.payload,
+      },
     }),
   },
   INIT_STATE,

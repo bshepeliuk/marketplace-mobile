@@ -1,4 +1,4 @@
-import { compose, lifecycle } from 'recompose';
+import { compose, lifecycle, hoistStatics } from 'recompose';
 import { connect } from 'react-redux';
 
 import {
@@ -6,6 +6,10 @@ import {
   productsOperations,
 } from '../../modules/products';
 import BrowseScreenview from './BrowseScreenView';
+import {
+  favoriteSwitcherOperations,
+  withFavoriteSwitcher,
+} from '../../helpers/withFavoriteSwitcher';
 
 const mapStateToProps = (state) => ({
   products: productsSelectors.getLatest(state),
@@ -14,12 +18,14 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
+  ...favoriteSwitcherOperations,
   fetchLatestProducts: productsOperations.fetchLatestProducts,
   fetchMoreProducts: productsOperations.fetchMoreProducts,
 };
 
 const enhancer = compose(
   connect(mapStateToProps, mapDispatchToProps),
+  withFavoriteSwitcher,
   lifecycle({
     componentDidMount() {
       const { fetchLatestProducts } = this.props;
@@ -29,4 +35,4 @@ const enhancer = compose(
   }),
 );
 
-export default enhancer(BrowseScreenview);
+export default hoistStatics(enhancer)(BrowseScreenview);

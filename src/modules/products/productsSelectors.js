@@ -19,10 +19,10 @@ export const getProduct = createSelector(
 );
 
 export const getProductOwner = createSelector(
-  (state, id) => {
+  (state, productId) => {
     const users = getUsersEntities(state);
     const products = getProductsEntities(state);
-    const product = products[id];
+    const product = products[productId];
 
     if (!product) {
       return undefined;

@@ -15,7 +15,7 @@ export const urls = {
   products: `${baseURL}/products`,
   chats: `${baseURL}/chats`,
   fetchSaved: `${baseURL}/products/saved`,
-  currentUser: `${baseURL}/users`,
+  users: `${baseURL}/users`,
   searchProduct: `${baseURL}/products/search`,
 };
 
@@ -25,9 +25,6 @@ export const Viewer = {
   },
   update(viewer) {
     return axios.put(urls.viewer, viewer);
-  },
-  getCurrentUser(userId) {
-    return axios.get(`${urls.currentUser}/${userId}`);
   },
 };
 
@@ -108,6 +105,9 @@ export const Image = {
 };
 
 export const Products = {
+  getOwner(ownerId) {
+    return axios.get(`${urls.users}/${ownerId}`);
+  },
   getMoreProducts({ offset, limit = 20 }) {
     return axios.get(urls.getProducts, {
       params: {
@@ -125,7 +125,7 @@ export const Products = {
     return axios.get(`${urls.products}/${id}`);
   },
   getUserProducts(userId) {
-    return axios.get(`${urls.currentUser}/${userId}/products`);
+    return axios.get(`${urls.users}/${userId}/products`);
   },
 
   add(product) {

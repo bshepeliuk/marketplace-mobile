@@ -12,6 +12,7 @@ function ProductList({
   isLoadingMore,
   fetchItems,
   fetchMoreItems,
+  favoriteSwitcher,
 }) {
   return (
     <FlatList
@@ -23,7 +24,12 @@ function ProductList({
       keyExtractor={(item) => item.id}
       onEndReached={fetchMoreItems}
       onEndReachedThreshold={0.3}
-      renderItem={({ item }) => <ProductItem item={item} />}
+      renderItem={({ item }) => (
+        <ProductItem
+          item={item}
+          favoriteSwitcher={favoriteSwitcher}
+        />
+      )}
       ListFooterComponent={() =>
         isLoadingMore && <Loader styles={s.loader} size="large" />
       }
@@ -36,6 +42,7 @@ ProductList.defaultProps = {
   isLoadingMore: false,
   fetchItems: () => {},
   fetchMoreItems: () => {},
+  favoriteSwitcher: () => {},
 };
 
 ProductList.propTypes = {
@@ -50,6 +57,7 @@ ProductList.propTypes = {
   isLoadingMore: T.bool,
   fetchMoreItems: T.func,
   fetchItems: T.func,
+  favoriteSwitcher: T.func,
 };
 
 export default ProductList;

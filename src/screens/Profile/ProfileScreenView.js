@@ -13,16 +13,17 @@ function ProfileScreenView({
   user,
 }) {
   return (
-    <View style={s.container}>
-      <Text>Profile</Text>
-      <Button title="logout" onPress={handleLogout} />
-
+    <>
+      <View>
+        <Text>Profile: {user.fullName}</Text>
+        <Button title="logout" onPress={handleLogout} />
+      </View>
       <ProductList
         isLoading={isLoading}
         items={products}
         fetchItems={() => fetchOwnProducts(user.id)}
       />
-    </View>
+    </>
   );
 }
 
@@ -31,6 +32,7 @@ ProfileScreenView.propTypes = {
   fetchOwnProducts: T.func,
   user: T.shape({
     id: T.string,
+    fullName: T.string,
   }),
   isLoading: T.bool,
   products: T.arrayOf(

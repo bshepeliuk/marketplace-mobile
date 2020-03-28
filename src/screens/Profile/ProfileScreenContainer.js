@@ -50,6 +50,7 @@ const enhancer = compose(
   lifecycle({
     componentDidMount() {
       const { fetchOwnProducts, user } = this.props;
+
       fetchOwnProducts(user.id);
     },
   }),

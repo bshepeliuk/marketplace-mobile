@@ -1,1 +1,1 @@
-export const getUser = (state) => state.viewer.user;
+export const getUser = (state) => state.viewer.viewer.user;

@@ -7,16 +7,18 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 15,
     textAlign: 'center',
+    marginTop: 3,
   },
   unactive: {
     color: colors.grey,
-    fontSize: 12,
+    fontSize: 10,
     lineHeight: 15,
     textAlign: 'center',
+    marginTop: 3,
   },
   addProductIcon: {
     position: 'absolute',
-    bottom: 15,
+    bottom: 4,
   },
 });
 
