@@ -11,14 +11,12 @@ function SavedScreenView({
   favoriteSwitcher,
 }) {
   return (
-    <>
-      <ProductList
-        isLoading={isLoading}
-        items={products}
-        fetchItems={fetchSavedProducts}
-        favoriteSwitcher={favoriteSwitcher}
-      />
-    </>
+    <ProductList
+      isLoading={isLoading}
+      items={products}
+      fetchItems={fetchSavedProducts}
+      favoriteSwitcher={favoriteSwitcher}
+    />
   );
 }
 

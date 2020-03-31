@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   loader: {
-    flex: 1,
     marginTop: 15,
     marginBottom: 30,
   },

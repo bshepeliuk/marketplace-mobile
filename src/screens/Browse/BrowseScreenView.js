@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, SafeAreaView } from 'react-native';
 import T from 'prop-types';
 
 import ProductList from '../../components/Products/ProductList';
+import SafeAreaContainer from '../../components/SafeAreaContainer/SafeAreaContainer';
 import s from './styles';
 
 function BrowseScreenView({
@@ -14,14 +14,16 @@ function BrowseScreenView({
   favoriteSwitcher,
 }) {
   return (
-    <ProductList
-      items={products}
-      isLoading={isLoading}
-      isLoadingMore={isLoadingMore}
-      fetchItems={fetchLatestProducts}
-      fetchMoreItems={fetchMoreProducts}
-      favoriteSwitcher={favoriteSwitcher}
-    />
+    <SafeAreaContainer>
+      <ProductList
+        items={products}
+        isLoading={isLoading}
+        isLoadingMore={isLoadingMore}
+        fetchItems={fetchLatestProducts}
+        fetchMoreItems={fetchMoreProducts}
+        favoriteSwitcher={favoriteSwitcher}
+      />
+    </SafeAreaContainer>
   );
 }
 
