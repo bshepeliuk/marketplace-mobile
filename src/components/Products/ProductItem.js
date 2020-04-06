@@ -26,6 +26,7 @@ function ProductItem({ item, favoriteSwitcher }) {
   return (
     <View style={s.product}>
       <TouchableOpacity
+        activeOpacity={1}
         onPress={() =>
           NavigationService.navigateToProduct({
             productId: item.id,
@@ -40,6 +41,7 @@ function ProductItem({ item, favoriteSwitcher }) {
         <View style={s.priceWrap}>
           <Text style={s.priceTxt}>${item.price}</Text>
           <TouchableOpacity
+            activeOpacity={0.9}
             onPress={() =>
               favoriteSwitcher({
                 productId: item.id,

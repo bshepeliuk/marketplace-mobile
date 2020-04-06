@@ -3,20 +3,28 @@ import T from 'prop-types';
 
 import ProductList from '../../components/Products/ProductList';
 import SafeAreaContainer from '../../components/SafeAreaContainer/SafeAreaContainer';
-import SearchBar from '../Search/SearchBar';
+import SearchBar from './SearchBar';
 
-function BrowseScreenView({
+function SearchScreenView({
   products,
   isLoading,
-  isLoadingMore,
-  fetchMoreProducts,
-  fetchLatestProducts,
   favoriteSwitcher,
+  searchProducts,
+  query,
   handleSearch,
-  keywords,
   handleChange,
   handleReset,
+  keywords,
+  searchMoreProducts,
+  isLoadingMore,
 }) {
+  function fetch() {
+    searchMoreProducts(query);
+  }
+
+  function fetchItems() {
+    searchProducts(query);
+  }
   return (
     <SafeAreaContainer>
       <>
@@ -27,11 +35,11 @@ function BrowseScreenView({
           initValue={keywords}
         />
         <ProductList
-          items={products}
           isLoading={isLoading}
+          items={products}
+          fetchItems={fetchItems}
+          fetchMoreItems={fetch}
           isLoadingMore={isLoadingMore}
-          fetchItems={fetchLatestProducts}
-          fetchMoreItems={fetchMoreProducts}
           favoriteSwitcher={favoriteSwitcher}
         />
       </>
@@ -39,13 +47,13 @@ function BrowseScreenView({
   );
 }
 
-BrowseScreenView.navigationOptions = () => {
-  return {
-    headerShown: false,
-  };
-};
+SearchScreenView.navigationOptions = () => ({
+  headerShown: false,
+});
 
-BrowseScreenView.propTypes = {
+SearchScreenView.propTypes = {
+  isLoading: T.bool,
+  favoriteSwitcher: T.func,
   products: T.arrayOf(
     T.shape({
       title: T.string,
@@ -53,14 +61,13 @@ BrowseScreenView.propTypes = {
       photos: T.arrayOf(T.string),
     }),
   ),
-  isLoading: T.bool,
-  isLoadingMore: T.bool,
-  fetchMoreProducts: T.func,
-  fetchLatestProducts: T.func,
-  favoriteSwitcher: T.func,
+  searchProducts: T.func,
+  query: T.object,
   handleSearch: T.func,
-  handleReset: T.func,
   handleChange: T.func,
+  handleReset: T.func,
+  searchMoreProducts: T.func,
+  isLoadingMore: T.bool,
 };
 
-export default BrowseScreenView;
+export default SearchScreenView;

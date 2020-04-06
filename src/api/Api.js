@@ -141,10 +141,14 @@ export const Products = {
     return axios.post(`${urls.products}/${productId}/unsave`);
   },
 
-  search(queryString, offset = 0, limit = 20) {
-    return axios.get(
-      `${urls.searchProduct}?${queryString}&limit=${limit}&offset=${offset}`,
-    );
+  search({ query, offset, limit = 20 }) {
+    return axios.get(urls.searchProduct, {
+      params: {
+        ...query,
+        offset,
+        limit,
+      },
+    });
   },
 };
 

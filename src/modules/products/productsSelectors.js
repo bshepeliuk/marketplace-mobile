@@ -6,7 +6,6 @@ const getlatestIds = (state) => state.products.latestProducts.items;
 const getSavedIds = (state) => state.products.savedProducts.items;
 const getSetOwnProductsIds = (state) =>
   state.products.ownProducts.items;
-const getFoundProdIds = (state) => state.products.foundProducts.items;
 
 export const getLatest = createSelector(
   [getProductsEntities, getlatestIds],
@@ -43,9 +42,4 @@ export const getOwnProducts = createSelector(
   (entities, ids) => {
     return ids.map((id) => entities[id]);
   },
-);
-
-export const getFoundProducts = createSelector(
-  [getProductsEntities, getFoundProdIds],
-  (entities, ids) => ids.map((id) => entities[id]),
 );

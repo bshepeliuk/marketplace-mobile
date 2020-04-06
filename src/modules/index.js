@@ -15,6 +15,7 @@ const searchPersistConfig = {
   key: 'search',
   storage: AsyncStorage,
   whitelist: ['prevLocation'],
+  blacklist: ['found', 'foundMore'],
 };
 
 export default combineReducers({

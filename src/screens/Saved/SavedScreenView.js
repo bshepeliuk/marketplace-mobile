@@ -2,6 +2,8 @@ import React from 'react';
 import T from 'prop-types';
 
 import ProductList from '../../components/Products/ProductList';
+import SafeAreaContainer from '../../components/SafeAreaContainer/SafeAreaContainer';
+import SearchBar from '../Search/SearchBar';
 import s from './styles';
 
 function SavedScreenView({
@@ -9,16 +11,36 @@ function SavedScreenView({
   isLoading,
   fetchSavedProducts,
   favoriteSwitcher,
+  handleSearch,
+  handleChange,
+  handleReset,
+  keywords,
 }) {
   return (
-    <ProductList
-      isLoading={isLoading}
-      items={products}
-      fetchItems={fetchSavedProducts}
-      favoriteSwitcher={favoriteSwitcher}
-    />
+    <SafeAreaContainer>
+      <>
+        <SearchBar
+          handleSearch={handleSearch}
+          handleChange={handleChange}
+          handleReset={handleReset}
+          initValue={keywords}
+        />
+        <ProductList
+          isLoading={isLoading}
+          items={products}
+          fetchItems={fetchSavedProducts}
+          favoriteSwitcher={favoriteSwitcher}
+        />
+      </>
+    </SafeAreaContainer>
   );
 }
+
+SavedScreenView.navigationOptions = () => {
+  return {
+    headerShown: false,
+  };
+};
 
 SavedScreenView.propTypes = {
   products: T.arrayOf(
@@ -31,6 +53,9 @@ SavedScreenView.propTypes = {
   isLoading: T.bool,
   fetchSavedProducts: T.func,
   favoriteSwitcher: T.func,
+  handleSearch: T.func,
+  handleChange: T.func,
+  handleReset: T.func,
 };
 
 export default SavedScreenView;

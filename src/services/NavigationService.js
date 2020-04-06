@@ -47,6 +47,19 @@ class NavigationService {
       params: { ...product },
     });
   }
+
+  navigateToFoundProducts(query) {
+    this.navigate({
+      routeName: screens.Search,
+      params: { query },
+    });
+  }
+
+  navigateToBrowse() {
+    this.navigate({
+      routeName: screens.Browse,
+    });
+  }
 }
 
 export default new NavigationService();

@@ -4,6 +4,7 @@ import * as actions from './productsActions';
 import Api, { schemas } from '../../api';
 
 import * as productsSelectors from './productsSelectors';
+import { PAGE_SIZE } from '../constants';
 
 export const fetchLatestProducts = () => async (dispatch) => {
   try {
@@ -136,9 +137,13 @@ export const fetchOwnProducts = (userId) => async (dispatch) => {
 };
 
 export const fetchMoreProducts = () => async (dispatch, getState) => {
-  const { items, isLoadingMore } = getState().products.latestProducts;
+  const {
+    items,
+    isLoadingMore,
+    hasNoMore,
+  } = getState().products.latestProducts;
 
-  if (isLoadingMore) return;
+  if (hasNoMore || isLoadingMore) return;
 
   try {
     dispatch(actions.moreProducts.start());
@@ -148,31 +153,12 @@ export const fetchMoreProducts = () => async (dispatch, getState) => {
     });
     const { result, entities } = normalize(data, schemas.ProductList);
 
+    if (data.length < PAGE_SIZE) {
+      dispatch(actions.hasNoMore());
+    }
+
     dispatch(actions.moreProducts.success({ result, entities }));
   } catch (error) {
     dispatch(actions.moreProducts.error({ message: error.message }));
   }
-};
-
-export const searchProducts = (queryString, offset = 0) => async (
-  dispatch,
-) => {
-  try {
-    dispatch(actions.searchProducts.start());
-
-    const { data } = await Api.Products.search(queryString, offset);
-    const { result, entities } = normalize(data, schemas.ProductList);
-
-    dispatch(
-      actions.searchProducts.success({ result, entities, offset }),
-    );
-  } catch (error) {
-    dispatch(
-      actions.searchProducts.error({ message: error.message }),
-    );
-  }
-};
-
-export const removePrevFoundProducts = () => (dispatch) => {
-  dispatch(actions.clearPrevFoundProducts());
 };

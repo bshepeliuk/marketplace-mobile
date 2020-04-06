@@ -1,10 +1,10 @@
-import { StyleSheet, Platform, StatusBar } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 const styles = StyleSheet.create({
   AndroidSafeArea: {
-    flex: 1,
-    paddingTop:
-      Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+    flexGrow: 1,
+    height: '100%',
+    paddingTop: Platform.OS === 'android' ? 5 : 0,
   },
 });
 

@@ -31,11 +31,4 @@ export const userProducts = createAsyncActions(
 export const moreProducts = createAsyncActions(
   'products/FETCH_MORE_PRODUCTS',
 );
-
-export const searchProducts = createAsyncActions(
-  'products/SEARCH_PRODUCTS',
-);
-
-export const clearPrevFoundProducts = createAction(
-  'products/CLEAR_PREV_FOUND_PRODUCTS',
-);
+export const hasNoMore = createAction('products/HAS_NO_MORE');

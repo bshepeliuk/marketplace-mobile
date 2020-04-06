@@ -8,6 +8,7 @@ export const screens = {
   Profile: 'Profile',
   Browse: 'Browse',
   Product: 'Product',
+  Search: 'Search',
   Inbox: 'Inbox',
   Saved: 'Saved',
   AddNewProduct: 'AddNewProduct',

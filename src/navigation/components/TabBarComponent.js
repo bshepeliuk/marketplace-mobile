@@ -4,6 +4,7 @@ import { compose, withHandlers } from 'recompose';
 import T from 'prop-types';
 
 import { NavigationService } from '../../services';
+import { screens } from '../screens';
 
 const TabBarComponent = ({ jumpToIndex, ...props }) => {
   return (
@@ -21,7 +22,7 @@ TabBarComponent.propTypes = {
 const enhancer = compose(
   withHandlers({
     jumpToIndex: ({ jumpTo }) => ({ route }) => {
-      if (route.key === 'AddNewProductTab') {
+      if (route.key === screens.AddNewProductTab) {
         NavigationService.navigateToCreateProduct();
       } else {
         jumpTo(route.key);

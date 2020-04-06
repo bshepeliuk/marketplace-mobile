@@ -1,4 +1,4 @@
-import { compose, lifecycle } from 'recompose';
+import { compose, lifecycle, hoistStatics } from 'recompose';
 import { connect } from 'react-redux';
 
 import SavedScreenView from './SavedScreenView';
@@ -10,6 +10,7 @@ import {
   withFavoriteSwitcher,
   favoriteSwitcherOperations,
 } from '../../helpers/withFavoriteSwitcher';
+import { withSearchProducts } from '../Browse/BrowseScreenContainer';
 
 const mapStateToProps = (state) => ({
   products: productsSelectors.getSavedProducts(state),
@@ -29,6 +30,7 @@ const enhancer = compose(
     },
   }),
   withFavoriteSwitcher, // adding favoriteSwitcher method
+  withSearchProducts, // return handleSearch, handleChange, handleReset and initValue
 );
 
-export default enhancer(SavedScreenView);
+export default hoistStatics(enhancer)(SavedScreenView);

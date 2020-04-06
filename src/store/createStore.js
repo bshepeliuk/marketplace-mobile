@@ -17,6 +17,7 @@ const persistConfig = {
     'viewer',
     'entities',
     'auth',
+    'search',
   ],
 };
 

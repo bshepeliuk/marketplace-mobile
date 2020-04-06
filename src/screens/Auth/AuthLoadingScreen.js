@@ -22,7 +22,7 @@ function AuthLoadingScreen() {
 
   return (
     <View style={s.authLoader}>
-      <ActivityIndicator />
+      <ActivityIndicator size="large" />
       <StatusBar barStyle="default" />
     </View>
   );

@@ -9,7 +9,7 @@ export const INIT_STATE = {
     isErrorMore: false,
     isLoadingMore: false,
     errorMore: null,
-    hasMore: true,
+    hasNoMore: false,
     items: [],
   },
   product: {
@@ -34,14 +34,6 @@ export const INIT_STATE = {
     isLoading: false,
     error: null,
     items: [],
-  },
-  foundProducts: {
-    isError: false,
-    isLoading: false,
-    error: null,
-    hasMore: true,
-    items: [],
-    offset: 0,
   },
 };
 
@@ -276,42 +268,11 @@ export default handleActions(
         errorMore: action.payload,
       },
     }),
-    // search products
-    [actions.searchProducts.start]: (state) => ({
+    [actions.hasNoMore]: (state) => ({
       ...state,
-      foundProducts: {
-        ...state.foundProducts,
-        isLoading: true,
-      },
-    }),
-    [actions.searchProducts.success]: (state, action) => ({
-      ...state,
-      foundProducts: {
-        ...state.foundProducts,
-        isLoading: false,
-        items: [
-          ...state.foundProducts.items,
-          ...action.payload.result,
-        ],
-        offset: action.payload.offset,
-        hasMore: action.payload.result.length > 0 || false,
-      },
-    }),
-    [actions.searchProducts.error]: (state, action) => ({
-      ...state,
-      foundProducts: {
-        ...state.foundProducts,
-        isLoading: false,
-        isError: true,
-        error: action.payload,
-      },
-    }),
-    // remove found products list after press search button
-    [actions.clearPrevFoundProducts]: (state) => ({
-      ...state,
-      foundProducts: {
-        ...state.foundProducts,
-        items: [],
+      latestProducts: {
+        ...state.latestProducts,
+        hasNoMore: true,
       },
     }),
   },
