@@ -3,7 +3,9 @@ export const screens = {
   AuthLoading: 'AuthLoading',
   Login: 'Login',
   Register: 'Register',
+
   AddProductModal: 'AddProductModal',
+  FilterModal: 'FilterModal',
 
   Profile: 'Profile',
   Browse: 'Browse',
@@ -11,6 +13,7 @@ export const screens = {
   Search: 'Search',
   Inbox: 'Inbox',
   Saved: 'Saved',
+  Filter: 'Filter',
   AddNewProduct: 'AddNewProduct',
   ChooseLocation: 'ChooseLocation',
 

@@ -14,33 +14,29 @@ function SavedScreenView({
   handleSearch,
   handleChange,
   handleReset,
-  keywords,
+  values,
 }) {
   return (
     <SafeAreaContainer>
-      <>
-        <SearchBar
-          handleSearch={handleSearch}
-          handleChange={handleChange}
-          handleReset={handleReset}
-          initValue={keywords}
-        />
-        <ProductList
-          isLoading={isLoading}
-          items={products}
-          fetchItems={fetchSavedProducts}
-          favoriteSwitcher={favoriteSwitcher}
-        />
-      </>
+      <SearchBar
+        handleSearch={handleSearch}
+        handleChange={handleChange}
+        handleReset={handleReset}
+        initValue={values.keywords}
+      />
+      <ProductList
+        isLoading={isLoading}
+        items={products}
+        fetchItems={fetchSavedProducts}
+        favoriteSwitcher={favoriteSwitcher}
+      />
     </SafeAreaContainer>
   );
 }
 
-SavedScreenView.navigationOptions = () => {
-  return {
-    headerShown: false,
-  };
-};
+SavedScreenView.navigationOptions = () => ({
+  headerShown: false,
+});
 
 SavedScreenView.propTypes = {
   products: T.arrayOf(
@@ -50,6 +46,9 @@ SavedScreenView.propTypes = {
       photos: T.arrayOf(T.string),
     }),
   ),
+  values: T.shape({
+    keywords: T.string,
+  }),
   isLoading: T.bool,
   fetchSavedProducts: T.func,
   favoriteSwitcher: T.func,

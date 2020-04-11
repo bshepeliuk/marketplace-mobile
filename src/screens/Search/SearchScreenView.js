@@ -14,7 +14,7 @@ function SearchScreenView({
   handleSearch,
   handleChange,
   handleReset,
-  keywords,
+  values,
   searchMoreProducts,
   isLoadingMore,
 }) {
@@ -27,22 +27,20 @@ function SearchScreenView({
   }
   return (
     <SafeAreaContainer>
-      <>
-        <SearchBar
-          handleSearch={handleSearch}
-          handleChange={handleChange}
-          handleReset={handleReset}
-          initValue={keywords}
-        />
-        <ProductList
-          isLoading={isLoading}
-          items={products}
-          fetchItems={fetchItems}
-          fetchMoreItems={fetch}
-          isLoadingMore={isLoadingMore}
-          favoriteSwitcher={favoriteSwitcher}
-        />
-      </>
+      <SearchBar
+        handleSearch={handleSearch}
+        handleChange={handleChange}
+        handleReset={handleReset}
+        initValue={values.keywords}
+      />
+      <ProductList
+        isLoading={isLoading}
+        items={products}
+        fetchItems={fetchItems}
+        fetchMoreItems={fetch}
+        isLoadingMore={isLoadingMore}
+        favoriteSwitcher={favoriteSwitcher}
+      />
     </SafeAreaContainer>
   );
 }
@@ -61,6 +59,9 @@ SearchScreenView.propTypes = {
       photos: T.arrayOf(T.string),
     }),
   ),
+  values: T.shape({
+    keywords: T.string,
+  }),
   searchProducts: T.func,
   query: T.object,
   handleSearch: T.func,

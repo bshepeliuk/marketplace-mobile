@@ -10,7 +10,7 @@ import {
   withFavoriteSwitcher,
   favoriteSwitcherOperations,
 } from '../../helpers/withFavoriteSwitcher';
-import { withSearchProducts } from '../Browse/BrowseScreenContainer';
+import { withSearchProducts } from '../../helpers/withSearchProducts';
 
 const mapStateToProps = (state) => ({
   products: productsSelectors.getSavedProducts(state),

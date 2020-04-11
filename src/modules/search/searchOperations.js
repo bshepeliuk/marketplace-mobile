@@ -25,11 +25,11 @@ export const searchMoreProducts = (query) => async (
   getState,
 ) => {
   const {
-    found: { items },
+    found: { items, isLoading },
     foundMore: { isLoadingMore, hasNoMore },
   } = getState().search;
 
-  if (hasNoMore || isLoadingMore) return;
+  if (hasNoMore || isLoadingMore || isLoading) return;
 
   try {
     dispatch(actions.searchMore.start());

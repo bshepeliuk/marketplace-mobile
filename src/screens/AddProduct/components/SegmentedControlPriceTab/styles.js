@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     height: 32,
     flexBasis: '50%',
     borderColor: colors.primaryGreen,
-    borderWidth: 2,
+    borderWidth: StyleSheet.hairlineWidth,
     justifyContent: 'center',
     alignItems: 'center',
   },

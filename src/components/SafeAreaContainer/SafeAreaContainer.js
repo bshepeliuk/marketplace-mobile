@@ -1,19 +1,22 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
+import { View } from 'react-native';
+import { useSafeArea } from 'react-native-safe-area-context';
 import T from 'prop-types';
 
-import s from './styles';
-
 function SafeAreaContainer(props) {
-  return (
-    <SafeAreaView style={s.AndroidSafeArea}>
-      {props.children}
-    </SafeAreaView>
-  );
+  const insets = useSafeArea();
+
+  const safeAreaStyles = {
+    paddingTop: insets.top,
+    paddingBottom: insets.bottom,
+    flexGrow: 1,
+  };
+
+  return <View style={safeAreaStyles}>{props.children}</View>;
 }
 
 SafeAreaContainer.propTypes = {
-  children: T.element,
+  children: T.oneOfType([T.arrayOf(T.element), T.element]),
 };
 
 export default SafeAreaContainer;

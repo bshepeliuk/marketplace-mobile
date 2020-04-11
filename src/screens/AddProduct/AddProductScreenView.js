@@ -3,12 +3,12 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import T from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import CloseModalBtn from './components/CloseModalBtn/CloseModalBtn';
 import CreateProductBtn from './components/CreateProductBtn/CreateProductBtn';
 import SegmentedControlTab from './components/SegmentedControlPriceTab/SegmentedControlPriceTab';
 import Input from './components/Input/Input';
-import { ProductFormContext } from '../../context';
 import LoadPhotosSection from './components/LoadPhotosSection/LoadPhotosSection';
+import CloseBtn from '../../components/CloseBtn/CloseBtn';
+import { ProductFormContext } from '../../context';
 import s from './styles';
 
 function AddProductScreenView({
@@ -99,7 +99,7 @@ AddProductScreenView.navigationOptions = ({ navigation }) => {
     headerTitleAlign: 'center',
     headerLeftContainerStyle: s.leftBtnWrap,
     headerRightContainerStyle: s.rightBtnWrap,
-    headerLeft: () => <CloseModalBtn />,
+    headerLeft: () => <CloseBtn />,
     headerRight: () => (
       <CreateProductBtn {...{ handleSubmit, formIsValid }} />
     ),

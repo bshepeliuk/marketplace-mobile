@@ -11,6 +11,7 @@ import T from 'prop-types';
 
 import s from './styles';
 import { colors } from '../../styles';
+import { NavigationService } from '../../services';
 
 function SearchInput({
   handleSubmit,
@@ -28,7 +29,7 @@ function SearchInput({
         onFocus={() => setTouched(true)}
         placeholder="Search"
         placeholderTextColor={colors.grey}
-        onChangeText={handleChange}
+        onChangeText={(value) => handleChange('keywords', value)}
         value={initValue}
         onSubmitEditing={handleSubmit}
         style={s.searchInput}
@@ -75,7 +76,10 @@ function SearchBar({
             <Text style={s.cancelBtnTxt}>Cancel</Text>
           </TouchableOpacity>
         ) : (
-          <TouchableOpacity onPress={() => {}} style={s.filterBtn}>
+          <TouchableOpacity
+            onPress={() => NavigationService.navigateToFilter()}
+            style={s.filterBtn}
+          >
             <FontAwesome
               name="filter"
               size={27}

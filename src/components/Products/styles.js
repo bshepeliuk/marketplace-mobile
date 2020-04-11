@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   product: {
     width: '49%',
     height: 210,
-    borderWidth: 1,
+    borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.grey,
     borderRadius: 10,
     marginTop: 8,

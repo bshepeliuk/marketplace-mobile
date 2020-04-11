@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import T from 'prop-types';
 
 import NavigationService from '../../services/NavigationService';
@@ -10,7 +10,8 @@ import s from './styles';
 function ProductImage({ photos, styles }) {
   const emptyPhoto =
     'https://dummyimage.com/900x700/D6D6D6/fff.png&text=photo+is+empty';
-  const uri = photos && photos.length > 0 ? photos[0] : emptyPhoto;
+  const uri =
+    photos && photos.length > 0 && photos[0] ? photos[0] : emptyPhoto;
 
   return (
     <Image

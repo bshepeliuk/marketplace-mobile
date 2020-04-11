@@ -1,10 +1,12 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Platform } from 'react-native';
 import T from 'prop-types';
 
 import ProductItem from './ProductItem';
 import Loader from '../Loader/Loader';
 import s from './styles';
+
+const onEndReachedThreshold = Platform.OS === 'android' ? 0.1 : 0;
 
 function ProductList({
   items,
@@ -23,7 +25,7 @@ function ProductList({
       onRefresh={fetchItems}
       keyExtractor={(item) => item.id}
       onEndReached={fetchMoreItems}
-      onEndReachedThreshold={0.3}
+      onEndReachedThreshold={onEndReachedThreshold}
       renderItem={({ item }) => (
         <ProductItem
           item={item}

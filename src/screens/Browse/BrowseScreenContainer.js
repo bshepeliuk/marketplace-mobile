@@ -1,10 +1,4 @@
-import {
-  compose,
-  lifecycle,
-  hoistStatics,
-  withState,
-  withHandlers,
-} from 'recompose';
+import { compose, lifecycle, hoistStatics } from 'recompose';
 import { connect } from 'react-redux';
 
 import {
@@ -17,8 +11,7 @@ import {
   favoriteSwitcherOperations,
   withFavoriteSwitcher,
 } from '../../helpers/withFavoriteSwitcher';
-import NavigationService from '../../services/NavigationService';
-import { screens } from '../../navigation/screens';
+import { withSearchProducts } from '../../helpers/withSearchProducts';
 
 const mapStateToProps = (state) => ({
   products: productsSelectors.getLatest(state),
@@ -32,23 +25,6 @@ const mapDispatchToProps = {
   fetchMoreProducts: productsOperations.fetchMoreProducts,
   searchProducts: searchOperations.searchProducts,
 };
-
-export const withSearchProducts = compose(
-  withState('keywords', 'setKeywords', ''),
-  withHandlers({
-    handleSearch: (props) => () => {
-      NavigationService.navigateToFoundProducts({
-        keywords: props.keywords,
-      });
-    },
-    handleChange: (props) => (value) => {
-      props.setKeywords(value);
-    },
-    handleReset: (props) => () => {
-      props.setKeywords('');
-    },
-  }),
-);
 
 const enhancer = compose(
   connect(mapStateToProps, mapDispatchToProps),

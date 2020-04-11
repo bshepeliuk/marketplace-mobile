@@ -60,6 +60,12 @@ class NavigationService {
       routeName: screens.Browse,
     });
   }
+
+  navigateToFilter() {
+    this.navigate({
+      routeName: screens.FilterModal,
+    });
+  }
 }
 
 export default new NavigationService();

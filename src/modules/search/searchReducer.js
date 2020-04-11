@@ -42,6 +42,10 @@ export default handleActions(
     }),
     [actions.search.start]: (state) => ({
       ...state,
+      foundMore: {
+        ...state.foundMore,
+        hasNoMore: false,
+      },
       found: {
         ...state.found,
         isError: false,
@@ -92,7 +96,7 @@ export default handleActions(
     [actions.searchMore.error]: (state, action) => ({
       ...state,
       foundMore: {
-        ...state.found,
+        ...state.foundMore,
         isLoadingMore: false,
         isErrorMore: true,
         errorMore: action.payload,
@@ -102,7 +106,7 @@ export default handleActions(
     [actions.hasNoMore]: (state) => ({
       ...state,
       foundMore: {
-        ...state.found,
+        ...state.foundMore,
         hasNoMore: true,
       },
     }),

@@ -4,14 +4,15 @@ import { colors } from '../../styles';
 const styles = StyleSheet.create({
   searchBarContainer: {
     borderBottomColor: colors.grey,
-    borderBottomWidth: 1,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
     paddingHorizontal: 8,
+    backgroundColor: colors.white,
   },
   inputWrap: {
-    flex: 1,
+    flexGrow: 1,
   },
   inputIcon: {
     position: 'absolute',
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     borderColor: colors.grey,
-    borderWidth: 1,
+    borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 8,
     height: 36,
     paddingVertical: 10,

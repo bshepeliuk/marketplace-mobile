@@ -13,28 +13,26 @@ function BrowseScreenView({
   fetchLatestProducts,
   favoriteSwitcher,
   handleSearch,
-  keywords,
+  values,
   handleChange,
   handleReset,
 }) {
   return (
     <SafeAreaContainer>
-      <>
-        <SearchBar
-          handleSearch={handleSearch}
-          handleChange={handleChange}
-          handleReset={handleReset}
-          initValue={keywords}
-        />
-        <ProductList
-          items={products}
-          isLoading={isLoading}
-          isLoadingMore={isLoadingMore}
-          fetchItems={fetchLatestProducts}
-          fetchMoreItems={fetchMoreProducts}
-          favoriteSwitcher={favoriteSwitcher}
-        />
-      </>
+      <SearchBar
+        handleSearch={handleSearch}
+        handleChange={handleChange}
+        handleReset={handleReset}
+        initValue={values.keywords}
+      />
+      <ProductList
+        items={products}
+        isLoading={isLoading}
+        isLoadingMore={isLoadingMore}
+        fetchItems={fetchLatestProducts}
+        fetchMoreItems={fetchMoreProducts}
+        favoriteSwitcher={favoriteSwitcher}
+      />
     </SafeAreaContainer>
   );
 }
@@ -53,6 +51,9 @@ BrowseScreenView.propTypes = {
       photos: T.arrayOf(T.string),
     }),
   ),
+  values: T.shape({
+    keywords: T.string,
+  }),
   isLoading: T.bool,
   isLoadingMore: T.bool,
   fetchMoreProducts: T.func,
