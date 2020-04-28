@@ -46,7 +46,7 @@ function FilterScreenView({
         <TextInput
           placeholder="From"
           onChangeText={(value) => handleChange('priceFrom', value)}
-          value={values.priceTo}
+          value={values.priceFrom}
           editable={hasPrice}
           style={s.inputStyle}
         />
