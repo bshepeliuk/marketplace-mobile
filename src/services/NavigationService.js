@@ -15,6 +15,7 @@ class NavigationService {
   }
 
   goBack() {
+    console.log({ navigator: this.navigator, NavigationActions });
     this.navigator.dispatch(NavigationActions.back());
   }
 
@@ -34,10 +35,10 @@ class NavigationService {
     this.navigate({ routeName: screens.AddNewProduct });
   }
 
-  navigateToChooseLocation(onChangeLocation) {
+  navigateToChooseLocation(changeLocation) {
     this.navigate({
       routeName: screens.ChooseLocation,
-      params: { onChangeLocation },
+      params: { changeLocation },
     });
   }
 

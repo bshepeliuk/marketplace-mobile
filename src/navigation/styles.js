@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
   addProductIcon: {
     position: 'absolute',
-    bottom: 4,
+    bottom: 1,
   },
 });
 

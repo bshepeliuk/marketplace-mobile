@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   loader: {
     marginTop: 15,
-    marginBottom: 30,
+    marginBottom: 40,
   },
   productPhoto: {
     resizeMode: 'cover',
@@ -38,6 +38,9 @@ const styles = StyleSheet.create({
   },
   priceTxt: {
     fontWeight: 'bold',
+  },
+  listFooterContainer: {
+    marginBottom: 10,
   },
 });
 

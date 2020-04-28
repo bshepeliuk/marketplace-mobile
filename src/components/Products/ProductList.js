@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Platform } from 'react-native';
+import { FlatList, Platform, View } from 'react-native';
 import T from 'prop-types';
 
 import ProductItem from './ProductItem';
@@ -32,9 +32,11 @@ function ProductList({
           favoriteSwitcher={favoriteSwitcher}
         />
       )}
-      ListFooterComponent={() =>
-        isLoadingMore && <Loader styles={s.loader} size="large" />
-      }
+      ListFooterComponent={() => (
+        <View style={s.listFooterContainer}>
+          {isLoadingMore && <Loader styles={s.loader} size="large" />}
+        </View>
+      )}
     />
   );
 }

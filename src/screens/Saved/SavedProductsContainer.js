@@ -30,7 +30,7 @@ const enhancer = compose(
     },
   }),
   withFavoriteSwitcher, // adding favoriteSwitcher method
-  withSearchProducts, // return handleSearch, handleChange, handleReset and initValue
+  withSearchProducts, // return handleSearch, handleChange, handleReset and values
 );
 
 export default hoistStatics(enhancer)(SavedScreenView);

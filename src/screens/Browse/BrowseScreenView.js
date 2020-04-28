@@ -12,18 +12,20 @@ function BrowseScreenView({
   fetchMoreProducts,
   fetchLatestProducts,
   favoriteSwitcher,
-  handleSearch,
   values,
   handleChange,
-  handleReset,
+  handleSubmit,
+  setTouched,
+  touched,
 }) {
   return (
     <SafeAreaContainer>
       <SearchBar
-        handleSearch={handleSearch}
         handleChange={handleChange}
-        handleReset={handleReset}
+        handleSubmit={handleSubmit}
+        handleTouched={setTouched}
         initValue={values.keywords}
+        touched={touched}
       />
       <ProductList
         items={products}
@@ -59,8 +61,8 @@ BrowseScreenView.propTypes = {
   fetchMoreProducts: T.func,
   fetchLatestProducts: T.func,
   favoriteSwitcher: T.func,
-  handleSearch: T.func,
-  handleReset: T.func,
+  // handleSearch: T.func,
+  // handleReset: T.func,
   handleChange: T.func,
 };
 

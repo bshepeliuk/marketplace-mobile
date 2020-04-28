@@ -1,15 +1,16 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 import T from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import CreateProductBtn from './components/CreateProductBtn/CreateProductBtn';
-import SegmentedControlTab from './components/SegmentedControlPriceTab/SegmentedControlPriceTab';
 import Input from './components/Input/Input';
 import LoadPhotosSection from './components/LoadPhotosSection/LoadPhotosSection';
 import CloseBtn from '../../components/CloseBtn/CloseBtn';
 import { ProductFormContext } from '../../context';
+import SegmentedControlPrice from '../../components/SegmentedControlPrice/SegmentedControlPrice';
 import s from './styles';
+import ChooseLocationBtn from '../../components/ChooseLocationBtn/ChooseLocationBtn';
 
 function AddProductScreenView({
   values,
@@ -21,7 +22,7 @@ function AddProductScreenView({
   touched,
   errors,
   isImageLoading,
-  onChooseLocation,
+  changeLocation,
 }) {
   const propsForNestedComponents = {
     handleChange,
@@ -65,7 +66,8 @@ function AddProductScreenView({
 
           <Text style={[s.label, s.priceLabel]}>Price</Text>
           <View style={s.priceSectionWrap}>
-            <SegmentedControlTab />
+            <SegmentedControlPrice onChoosePrice={onChoosePrice} />
+
             <View style={s.priceInputWrap}>
               <Input
                 style={s.input}
@@ -76,14 +78,10 @@ function AddProductScreenView({
             </View>
           </View>
 
-          <TouchableOpacity
-            onPress={onChooseLocation}
-            style={s.chooseLocationBtn}
-          >
-            <Text>
-              {values.location ? values.location : 'Location'}
-            </Text>
-          </TouchableOpacity>
+          <ChooseLocationBtn
+            locationValue={values.location}
+            changeLocation={changeLocation}
+          />
         </View>
       </ProductFormContext.Provider>
     </KeyboardAwareScrollView>
@@ -111,7 +109,7 @@ AddProductScreenView.propTypes = {
   hasPrice: T.bool,
   onChoosePrice: T.func,
   isImageLoading: T.bool,
-  onChooseLocation: T.func,
+  changeLocation: T.func,
   // formik props
   handleChange: T.func,
   handleBlur: T.func,

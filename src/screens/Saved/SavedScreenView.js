@@ -11,18 +11,20 @@ function SavedScreenView({
   isLoading,
   fetchSavedProducts,
   favoriteSwitcher,
-  handleSearch,
   handleChange,
-  handleReset,
+  handleSubmit,
+  setTouched,
   values,
+  touched,
 }) {
   return (
     <SafeAreaContainer>
       <SearchBar
-        handleSearch={handleSearch}
         handleChange={handleChange}
-        handleReset={handleReset}
+        handleSubmit={handleSubmit}
+        handleTouched={setTouched}
         initValue={values.keywords}
+        touched={touched}
       />
       <ProductList
         isLoading={isLoading}
@@ -52,9 +54,7 @@ SavedScreenView.propTypes = {
   isLoading: T.bool,
   fetchSavedProducts: T.func,
   favoriteSwitcher: T.func,
-  handleSearch: T.func,
   handleChange: T.func,
-  handleReset: T.func,
 };
 
 export default SavedScreenView;

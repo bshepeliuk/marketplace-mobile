@@ -1,11 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
+import T from 'prop-types';
 
 import s from './styles';
-import { ProductFormContext } from '../../../../context';
 
-function SegmentedControlPriceTab() {
-  const { onChoosePrice } = useContext(ProductFormContext);
+function SegmentedControlPrice({ onChoosePrice }) {
   const priceTabValue = 'price';
   const freeTabValue = 'free';
 
@@ -36,7 +35,9 @@ function SegmentedControlPriceTab() {
       </TouchableOpacity>
       <TouchableOpacity
         style={[s.segmentBtn, s.rightSegment, freeTabActive]}
-        onPress={(evt) => handleTab(freeTabValue, evt)}
+        onPress={(evt) => {
+          handleTab(freeTabValue, evt);
+        }}
         activeOpacity={0.9}
       >
         <Text style={freeTabTxt}>Free</Text>
@@ -45,4 +46,12 @@ function SegmentedControlPriceTab() {
   );
 }
 
-export default SegmentedControlPriceTab;
+SegmentedControlPrice.defaultProps = {
+  onChoosePrice: () => {},
+};
+
+SegmentedControlPrice.propTypes = {
+  onChoosePrice: T.func,
+};
+
+export default SegmentedControlPrice;

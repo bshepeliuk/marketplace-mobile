@@ -11,33 +11,28 @@ function SearchScreenView({
   favoriteSwitcher,
   searchProducts,
   query,
-  handleSearch,
   handleChange,
-  handleReset,
   values,
   searchMoreProducts,
   isLoadingMore,
+  setTouched,
+  handleSubmit,
+  touched,
 }) {
-  function fetch() {
-    searchMoreProducts(query);
-  }
-
-  function fetchItems() {
-    searchProducts(query);
-  }
   return (
     <SafeAreaContainer>
       <SearchBar
-        handleSearch={handleSearch}
         handleChange={handleChange}
-        handleReset={handleReset}
+        handleSubmit={handleSubmit}
+        handleTouched={setTouched}
         initValue={values.keywords}
+        touched={touched}
       />
       <ProductList
         isLoading={isLoading}
         items={products}
-        fetchItems={fetchItems}
-        fetchMoreItems={fetch}
+        fetchItems={() => searchProducts(query)}
+        fetchMoreItems={() => searchMoreProducts(query)}
         isLoadingMore={isLoadingMore}
         favoriteSwitcher={favoriteSwitcher}
       />
@@ -61,14 +56,23 @@ SearchScreenView.propTypes = {
   ),
   values: T.shape({
     keywords: T.string,
+    location: T.string,
+    priceFrom: T.string,
+    priceTo: T.string,
   }),
   searchProducts: T.func,
   query: T.object,
-  handleSearch: T.func,
   handleChange: T.func,
-  handleReset: T.func,
   searchMoreProducts: T.func,
   isLoadingMore: T.bool,
+  setTouched: T.func,
+  handleSubmit: T.func,
+  touched: T.shape({
+    keywords: T.bool,
+    location: T.bool,
+    priceFrom: T.bool,
+    priceTo: T.bool,
+  }),
 };
 
 export default SearchScreenView;

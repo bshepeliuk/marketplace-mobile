@@ -1,74 +1,34 @@
 import React from 'react';
-import {
-  View,
-  TouchableOpacity,
-  TextInput,
-  Text,
-  Keyboard,
-} from 'react-native';
-import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
+import { View, TouchableOpacity, Text, Keyboard } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 import T from 'prop-types';
 
 import s from './styles';
 import { colors } from '../../styles';
 import { NavigationService } from '../../services';
-
-function SearchInput({
-  handleSubmit,
-  handleChange,
-  initValue,
-  setTouched,
-}) {
-  return (
-    <View style={s.inputWrap}>
-      <View style={s.inputIcon}>
-        <MaterialIcons name="search" size={24} color={colors.grey} />
-      </View>
-
-      <TextInput
-        onFocus={() => setTouched(true)}
-        placeholder="Search"
-        placeholderTextColor={colors.grey}
-        onChangeText={(value) => handleChange('keywords', value)}
-        value={initValue}
-        onSubmitEditing={handleSubmit}
-        style={s.searchInput}
-      />
-    </View>
-  );
-}
+import SearchInput from './SearchInput';
 
 function SearchBar({
-  handleSearch,
   handleChange,
-  handleReset,
+  handleSubmit,
   initValue,
+  touched,
+  handleTouched,
 }) {
-  const [isTouched, setTouched] = React.useState(false);
-
-  function handleSubmit() {
-    handleSearch();
-    setTouched(false);
-    handleReset();
-  }
-
   return (
     <View style={s.searchBarContainer}>
       <SearchInput
-        {...{
-          handleChange,
-          handleReset,
-          initValue,
-          setTouched,
-          handleSubmit,
-        }}
+        handleInputChange={handleChange}
+        inputInitValue={initValue}
+        handleSubmit={handleSubmit}
+        setTouched={handleTouched}
       />
 
       <View style={s.btnWrap}>
-        {isTouched ? (
+        {touched.keywords ? (
           <TouchableOpacity
             onPress={() => {
-              setTouched(false);
+              handleTouched('keywords', false);
               Keyboard.dismiss();
             }}
             style={s.cancelBtn}
@@ -93,15 +53,13 @@ function SearchBar({
 }
 
 SearchBar.defaultProps = {
-  handleSearch: () => {},
   handleChange: () => {},
-  handleReset: () => {},
 };
 
 SearchBar.propTypes = {
-  handleSearch: T.func,
+  handleSubmit: T.func,
   handleChange: T.func,
-  handleReset: T.func,
+  initValue: T.string,
 };
 
 export default SearchBar;

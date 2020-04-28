@@ -1,4 +1,9 @@
-import { compose, withHandlers, withState } from 'recompose';
+import {
+  compose,
+  withHandlers,
+  withState,
+  withProps,
+} from 'recompose';
 import { connect } from 'react-redux';
 
 import ChooseLocationScreenView from './ChooseLocationScreenView';
@@ -16,6 +21,9 @@ const mapDispatchToProps = {
 };
 
 const enhancer = compose(
+  withProps((props) => ({
+    changeLocation: props.navigation.getParam('changeLocation'),
+  })),
   connect(mapStateToProps, mapDispatchToProps),
   withState('text', 'setText', ''),
   withHandlers({
@@ -29,12 +37,13 @@ const enhancer = compose(
 
       if (!props.text || hasTheSameLocation) return;
 
-      props.navigation.state.params.onChangeLocation(props.text);
+      props.changeLocation(props.text);
       props.setSavedLocations(props.text);
+
       NavigationService.goBack();
     },
     onSelectLocation: (props) => (location) => {
-      props.navigation.state.params.onChangeLocation(location);
+      props.changeLocation(location);
       NavigationService.goBack();
     },
     clearSavedLocations: (props) => () => {

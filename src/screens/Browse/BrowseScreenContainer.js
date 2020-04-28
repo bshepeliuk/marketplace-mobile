@@ -29,7 +29,8 @@ const mapDispatchToProps = {
 const enhancer = compose(
   connect(mapStateToProps, mapDispatchToProps),
   withFavoriteSwitcher,
-  withSearchProducts, // return handleSearch, handleChange, handleReset and initValue
+  // return handleChange, handleSubmit, setTouched and values, touched
+  withSearchProducts,
   lifecycle({
     componentDidMount() {
       const { fetchLatestProducts } = this.props;

@@ -35,7 +35,7 @@ const enhancer = compose(
   })),
   connect(mapStateToProps, mapDispatchToProps),
   withFavoriteSwitcher, // return favoriteSwitcher method
-  withSearchProducts, // return handleSearch, handleChange, handleReset and initValue
+  withSearchProducts, // return handleSearch, handleChange, handleReset and values: object
   lifecycle({
     componentDidMount() {
       const { searchProducts, query } = this.props;
@@ -46,6 +46,14 @@ const enhancer = compose(
       const { searchProducts, query } = this.props;
 
       if (prevProps.query.keywords !== query.keywords) {
+        searchProducts(query);
+      }
+      // if user didn't change keywords value but select free price
+      if (
+        prevProps.query.keywords === query.keywords &&
+        prevProps.query.priceFrom !== query.priceFrom &&
+        prevProps.query.priceFrom !== query.priceTo
+      ) {
         searchProducts(query);
       }
     },

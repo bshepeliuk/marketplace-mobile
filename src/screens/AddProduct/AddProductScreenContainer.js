@@ -24,9 +24,28 @@ const mapDispatchToProps = {
   addProduct: productsOperations.addProduct,
 };
 
+export const withPriceHandler = compose(
+  withState('hasPrice', 'setHasPrice', true),
+  withHandlers({
+    onChoosePrice: (props) => (segmentPriceValue) => {
+      switch (segmentPriceValue) {
+        case 'price':
+          props.setHasPrice(true);
+          break;
+
+        case 'free':
+          props.setHasPrice(false);
+          break;
+
+        default:
+          break;
+      }
+    },
+  }),
+);
+
 const enhancer = compose(
   connect(mapStateToProps, mapDispatchToProps),
-  withState('hasPrice', 'setHasPrice', true),
   withState('isImageLoading', 'setImageLoading', false),
   withFormik({
     validationSchema: validation.AddProductSchema,
@@ -54,6 +73,7 @@ const enhancer = compose(
       }
     },
   }),
+  withPriceHandler, // return hasPrise: boolean
   withHandlers({
     handleLoadImages: (props) => async (photo) => {
       const PHOTOS_LIMIT = 5;
@@ -75,7 +95,7 @@ const enhancer = compose(
         throw error;
       }
     },
-    onChangeLocation: (props) => (value) => {
+    changeLocation: (props) => (value) => {
       props.setFieldValue('location', value);
     },
   }),
@@ -123,25 +143,6 @@ const enhancer = compose(
         default:
           break;
       }
-    },
-    onChoosePrice: (props) => (segmentPriceValue) => {
-      switch (segmentPriceValue) {
-        case 'price':
-          props.setHasPrice(true);
-          break;
-
-        case 'free':
-          props.setHasPrice(false);
-          break;
-
-        default:
-          break;
-      }
-    },
-    onChooseLocation: (props) => () => {
-      NavigationService.navigateToChooseLocation(
-        props.onChangeLocation,
-      );
     },
   }),
 
