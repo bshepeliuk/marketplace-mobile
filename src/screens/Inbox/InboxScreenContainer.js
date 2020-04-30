@@ -1,6 +1,27 @@
-import { compose } from 'recompose';
+import { compose, lifecycle, hoistStatics } from 'recompose';
+import { connect } from 'react-redux';
+
 import InboxScreenView from './InboxScreenView';
+import { chatsOperations, chatsSelectors } from '../../modules/chats';
 
-const enhancer = compose();
+const mapStateToProps = (state) => ({
+  items: chatsSelectors.getChatsWithLastMessage(state),
+  isLoading: state.chats.fetchChats.isLoading,
+});
 
-export default enhancer(InboxScreenView);
+const mapDispatchToProps = {
+  fetchChats: chatsOperations.fetchChats,
+};
+
+const enhancer = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  lifecycle({
+    componentDidMount() {
+      const { fetchChats } = this.props;
+
+      fetchChats();
+    },
+  }),
+);
+
+export default hoistStatics(enhancer)(InboxScreenView);

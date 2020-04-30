@@ -1,4 +1,7 @@
-import { createAsyncActions } from '@letapp/redux-actions';
+import {
+  createAsyncActions,
+  createAction,
+} from '@letapp/redux-actions';
 
 export const sendMessage = createAsyncActions(
   'messages/SEND_MESSAGE',
@@ -9,3 +12,5 @@ export const fetchMessages = createAsyncActions(
 export const fetchMoreMessages = createAsyncActions(
   'messages/FETCH_MORE_MESSAGES',
 );
+
+export const hasNoMore = createAction('messages/HAS_NO_MORE');

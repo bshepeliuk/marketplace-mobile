@@ -12,6 +12,7 @@ export const screens = {
   Product: 'Product',
   Search: 'Search',
   Inbox: 'Inbox',
+  MessageList: 'MessageList',
   Saved: 'Saved',
   Filter: 'Filter',
   AddNewProduct: 'AddNewProduct',

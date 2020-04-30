@@ -4,7 +4,6 @@ import {
   TouchableOpacity,
   Text,
   TextInput,
-  StyleSheet,
 } from 'react-native';
 import T from 'prop-types';
 

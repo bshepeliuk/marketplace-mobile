@@ -67,6 +67,13 @@ class NavigationService {
       routeName: screens.FilterModal,
     });
   }
+
+  navigateToChat(chatId) {
+    this.navigate({
+      routeName: screens.MessageList,
+      params: { chatId },
+    });
+  }
 }
 
 export default new NavigationService();

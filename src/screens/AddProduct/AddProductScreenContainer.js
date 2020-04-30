@@ -14,7 +14,6 @@ import AddProductScreenView from './AddProductScreenView';
 import { productsOperations } from '../../modules/products';
 import Api from '../../api';
 import { validation } from '../../helpers';
-import { NavigationService } from '../../services';
 
 const mapStateToProps = (state) => ({
   isLoading: state.products.newProduct.isLoading,

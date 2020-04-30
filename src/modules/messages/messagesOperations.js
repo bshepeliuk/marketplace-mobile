@@ -4,7 +4,7 @@ import * as actions from './messagesActions';
 import Api, { schemas } from '../../api';
 import { createMessage } from './messagesCreators';
 import { viewerSelectors } from '../viewer';
-import { MESSAGE_LIMIT } from '.';
+import { MESSAGE_LIMIT } from './messagesConstans';
 
 export const sendMessage = (chatId, text) => async (
   dispatch,
@@ -41,7 +41,6 @@ export const fetchMessages = (chatId) => async (dispatch) => {
 
     const res = await Api.Messages.fetch(chatId);
     const lastMessageId = res.data[res.data.length - 1].id;
-    const hasMore = res.data.length === MESSAGE_LIMIT || false;
     const { result, entities } = normalize(
       res.data,
       schemas.MessageCollection,
@@ -53,7 +52,6 @@ export const fetchMessages = (chatId) => async (dispatch) => {
         result,
         entities,
         lastMessageId,
-        hasMore,
       }),
     );
   } catch (error) {
@@ -63,17 +61,27 @@ export const fetchMessages = (chatId) => async (dispatch) => {
 
 export const fetchMoreMessages = (chatId, lastMsgId) => async (
   dispatch,
+  getState,
 ) => {
+  const {
+    isLoadingMore,
+    hasNoMore,
+  } = getState().messages.fetchMessages;
   try {
+    if (isLoadingMore || hasNoMore) return;
+
     dispatch(actions.fetchMoreMessages.start());
 
     const res = await Api.Messages.fetchMore(chatId, lastMsgId);
     const lastMessageId = res.data[res.data.length - 1].id;
-    const hasMore = res.data.length === MESSAGE_LIMIT || false;
     const { result, entities } = normalize(
       res.data,
       schemas.MessageCollection,
     );
+
+    if (res.data.length < MESSAGE_LIMIT) {
+      dispatch(actions.hasNoMore());
+    }
 
     dispatch(
       actions.fetchMoreMessages.success({
@@ -81,7 +89,6 @@ export const fetchMoreMessages = (chatId, lastMsgId) => async (
         result,
         entities,
         lastMessageId,
-        hasMore,
       }),
     );
   } catch (error) {

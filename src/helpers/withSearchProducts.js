@@ -29,16 +29,13 @@ export const withSearchProducts = compose(
       touched: initValueTouched,
     }),
     {
-      handleChange: (prevState) => (fieldName, value) => {
-        // console.log({ [fieldName]: value });
-        return {
-          ...prevState,
-          values: {
-            ...prevState.values,
-            [fieldName]: value,
-          },
-        };
-      },
+      handleChange: (prevState) => (fieldName, value) => ({
+        ...prevState,
+        values: {
+          ...prevState.values,
+          [fieldName]: value,
+        },
+      }),
       handleReset: (prevState, props) => () => ({
         ...prevState,
         values: props.initialValues,

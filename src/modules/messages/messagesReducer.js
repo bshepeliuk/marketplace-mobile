@@ -14,7 +14,10 @@ export const INIT_STATE = {
     isError: false,
     isLoading: false,
     error: null,
-    hasMore: true,
+    isErrorMore: false,
+    isLoadingMore: false,
+    errorMore: null,
+    hasNoMore: false,
   },
 };
 
@@ -27,7 +30,7 @@ export default handleActions(
       ...state,
       items: {
         ...state.items,
-        [chatId]: (state.items[chatId] || []).concat(result),
+        [chatId]: [result, ...state.items[chatId]],
       },
       sendMessage: {
         ...state.sendMessage,
@@ -38,9 +41,9 @@ export default handleActions(
       state,
       { payload: { chatId, result, oldMessageId } },
     ) => {
-      const items = state.items[chatId]
-        .filter((id) => id !== oldMessageId)
-        .concat(result);
+      const items = state.items[chatId].filter(
+        (id) => id !== oldMessageId,
+      );
       return {
         ...state,
         sendMessage: {
@@ -49,7 +52,7 @@ export default handleActions(
         },
         items: {
           ...state.items,
-          [chatId]: items,
+          [chatId]: [result, ...items],
         },
       };
     },
@@ -76,7 +79,7 @@ export default handleActions(
       ...state,
       items: {
         ...state.items,
-        [chatId]: result.reverse(),
+        [chatId]: result,
       },
       fetchMessages: {
         ...state.fetchMessages,
@@ -99,22 +102,21 @@ export default handleActions(
       ...state,
       fetchMessages: {
         ...state.fetchMessages,
-        isLoading: true,
+        isLoadingMore: true,
       },
     }),
     [actions.fetchMoreMessages.success]: (
       state,
-      { payload: { chatId, result, lastMessageId, hasMore } },
+      { payload: { chatId, result, lastMessageId } },
     ) => ({
       ...state,
       items: {
         ...state.items,
-        [chatId]: [...result.reverse(), ...state.items[chatId]],
+        [chatId]: [...state.items[chatId], ...result],
       },
       fetchMessages: {
         ...state.fetchMessages,
-        hasMore,
-        isLoading: false,
+        isLoadingMore: false,
       },
       lastMessageId,
     }),
@@ -122,10 +124,16 @@ export default handleActions(
       ...state,
       fetchMessages: {
         ...state.fetchMessages,
-        isLoading: false,
-        isError: true,
-        hasMore: false,
-        error: action.payload,
+        isLoadingMore: false,
+        isErrorMore: true,
+        errorMore: action.payload,
+      },
+    }),
+    [actions.hasNoMore]: (state) => ({
+      ...state,
+      fetchMessages: {
+        ...state.fetchMessages,
+        hasNoMore: true,
       },
     }),
   },

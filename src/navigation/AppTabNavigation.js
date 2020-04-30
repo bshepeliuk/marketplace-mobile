@@ -73,19 +73,27 @@ const routes = {
   [screens.InboxTab]: {
     screen: InboxTab,
 
-    navigationOptions: {
-      tabBarIcon: ({ focused }) => {
-        return (
-          <MaterialIcons
-            name="inbox"
-            size={28}
-            color={focused ? colors.primaryGreen : colors.grey}
-          />
-        );
-      },
-      tabBarLabel: ({ focused }) => (
-        <Text style={[focused ? s.active : s.unactive]}>Inbox</Text>
-      ),
+    navigationOptions: ({ navigation }) => {
+      const { path } = navigation.router.getPathAndParamsForState(
+        navigation.state,
+      );
+      const tabBarVisible = !(path === screens.MessageList);
+
+      return {
+        tabBarVisible,
+        tabBarIcon: ({ focused }) => {
+          return (
+            <MaterialIcons
+              name="inbox"
+              size={28}
+              color={focused ? colors.primaryGreen : colors.grey}
+            />
+          );
+        },
+        tabBarLabel: ({ focused }) => (
+          <Text style={[focused ? s.active : s.unactive]}>Inbox</Text>
+        ),
+      };
     },
   },
 
@@ -121,4 +129,8 @@ export default createBottomTabNavigator(routes, {
       borderTopWidth: 0,
     },
   },
+
+  // navigationOptions: ({ navigation }) => ({
+  //   tabBarVisible: !(navigation.state.routeName === 'MessageList'),
+  // }),
 });
