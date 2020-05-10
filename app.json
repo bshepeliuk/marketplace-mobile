@@ -2,8 +2,8 @@
   "expo": {
     "name": "marketplace-mobile",
     "slug": "marketplace-mobile",
+    "sdkVersion": "37.0.0",
     "privacy": "public",
-    "sdkVersion": "35.0.0",
     "platforms": [
       "ios",
       "android",

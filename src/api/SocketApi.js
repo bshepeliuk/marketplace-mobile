@@ -8,17 +8,8 @@ class SocketApi {
         query: {
           token,
         },
+
         transports: ['websocket'],
-        timeout: 10000,
-        jsonp: false,
-        autoConnect: false,
-        agent: '-',
-        path: '/',
-        pfx: '-',
-        cert: '-',
-        ca: '-',
-        ciphers: '-',
-        rejectUnauthorized: '-',
       },
     );
   }

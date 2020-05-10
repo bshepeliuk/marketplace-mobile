@@ -27,6 +27,7 @@ const composeEnhancers = composeWithDevTools({
   realtime: true,
   port: 8000,
   suppressConnectError: false,
+  host: 'localhost',
 });
 
 const middleware = [thunk];
