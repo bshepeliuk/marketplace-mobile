@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  FlatList,
-  TouchableOpacity,
-  Text,
-  ScrollView,
-  RefreshControl,
-} from 'react-native';
+import { FlatList } from 'react-native';
 import T from 'prop-types';
 
 import Loader from '../../components/Loader/Loader';
@@ -34,6 +28,8 @@ function MessageListScreenView({
         inverted
         data={items}
         keyExtractor={(item) => item.id.toString()}
+        refreshing={isLoading}
+        onRefresh={() => fetchMessages(chatId)}
         renderItem={({ item }) => <MessageItem {...{ item }} />}
         ListFooterComponent={() =>
           isLoadingMore && hasMore && <Loader size="large" />
@@ -76,6 +72,8 @@ MessageListScreenView.propTypes = {
   setMessage: T.func,
   handleSend: T.func,
   message: T.string,
+  isLoading: T.bool,
+  fetchMessages: T.func,
 };
 
 export default MessageListScreenView;
