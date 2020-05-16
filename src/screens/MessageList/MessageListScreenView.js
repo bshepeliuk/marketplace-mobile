@@ -51,11 +51,9 @@ function MessageListScreenView({
 }
 
 MessageListScreenView.navigationOptions = ({ navigation }) => {
-  const participant = navigation.getParam('participant');
-  const fullName = participant ? participant.fullName : 'Loading...';
-
+  // TODO: need to add participant to header
   return {
-    title: fullName,
+    title: 'Test',
   };
 };
 

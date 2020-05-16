@@ -6,6 +6,7 @@ export const screens = {
 
   AddProductModal: 'AddProductModal',
   FilterModal: 'FilterModal',
+  SendMessageModal: 'SendMessageModal',
 
   Profile: 'Profile',
   Browse: 'Browse',

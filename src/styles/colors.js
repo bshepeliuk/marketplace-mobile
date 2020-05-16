@@ -8,6 +8,8 @@ const colors = {
   authBackgroudndColor: '#F8F9FB',
   backColor: '#F8F9FB',
   clouds: 'rgba(236, 240, 241,0.7)',
+  lightGreen: '#2ECC71',
+  blue: '#3498DB',
 };
 
 export default colors;

@@ -6,16 +6,13 @@ import { NavigationService } from '../../../../services';
 import s from '../styles';
 
 function ChatItem({ item }) {
-  const [participant] = item.participants;
-
   return (
     <TouchableOpacity
       onPress={() => NavigationService.navigateToChat(item.id)}
     >
       <View style={s.chatItem}>
         <Text>{item.product.title}</Text>
-        <Text>{item.lastMessage.text}</Text>
-        <Text>{participant.fullName}</Text>
+        <Text>{item.lastMessage && item.lastMessage.text}</Text>
       </View>
     </TouchableOpacity>
   );

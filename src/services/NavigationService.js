@@ -15,7 +15,6 @@ class NavigationService {
   }
 
   goBack() {
-    console.log({ navigator: this.navigator, NavigationActions });
     this.navigator.dispatch(NavigationActions.back());
   }
 
@@ -72,6 +71,13 @@ class NavigationService {
     this.navigate({
       routeName: screens.MessageList,
       params: { chatId },
+    });
+  }
+
+  navigateToSendMessageModal({ product }) {
+    this.navigate({
+      routeName: screens.SendMessageModal,
+      params: { product },
     });
   }
 }

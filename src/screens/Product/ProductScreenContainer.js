@@ -1,9 +1,24 @@
 import { connect } from 'react-redux';
-import { compose, withProps, lifecycle } from 'recompose';
+import {
+  compose,
+  withProps,
+  lifecycle,
+  withHandlers,
+  hoistStatics,
+} from 'recompose';
 
 import ProductScreenView from './ProductScreenView';
-import { productsSelectors } from '../../modules/products';
+import {
+  productsSelectors,
+  productsOperations,
+} from '../../modules/products';
 import { viewerOperations } from '../../modules/viewer';
+import NavigationService from '../../services/NavigationService';
+import {
+  withFavoriteSwitcher,
+  favoriteSwitcherOperations,
+} from '../../helpers/withFavoriteSwitcher';
+import { messagesOperations } from '../../modules/messages';
 
 function mapStateToProps(state, { productId }) {
   return {
@@ -14,7 +29,10 @@ function mapStateToProps(state, { productId }) {
 }
 
 const mapDispatchToProps = {
+  ...favoriteSwitcherOperations,
   fetchProductOwner: viewerOperations.fetchProductOwner,
+  fetchProduct: productsOperations.fetchProduct,
+  sendMessage: messagesOperations.sendMessage,
 };
 
 const enhancer = compose(
@@ -23,13 +41,28 @@ const enhancer = compose(
     ownerId: props.navigation.getParam('ownerId'),
   })),
   connect(mapStateToProps, mapDispatchToProps),
+  withFavoriteSwitcher, // return favoriteSwitcher fn
+  withHandlers({
+    goBack: () => () => {
+      NavigationService.goBack();
+    },
+    navigateToSendMessage: ({ product }) => () => {
+      NavigationService.navigateToSendMessageModal({ product });
+    },
+  }),
   lifecycle({
     componentDidMount() {
-      const { fetchProductOwner, ownerId } = this.props;
+      const {
+        fetchProductOwner,
+        fetchProduct,
+        ownerId,
+        productId,
+      } = this.props;
 
       fetchProductOwner(ownerId);
+      fetchProduct(productId);
     },
   }),
 );
 
-export default enhancer(ProductScreenView);
+export default hoistStatics(enhancer)(ProductScreenView);

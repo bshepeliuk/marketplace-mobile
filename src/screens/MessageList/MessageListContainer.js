@@ -20,10 +20,6 @@ const mapStateToProps = (state, props) => ({
   lastMessageId: state.messages.lastMessageId,
   isLoadingMore: state.messages.fetchMessages.isLoadingMore,
   isLoading: state.messages.fetchMessages.isLoading,
-  participant: messagesSelectors.getMessageParticipant(
-    state,
-    props.chatId,
-  ),
 });
 
 const mapDispatchToProps = {
@@ -60,7 +56,7 @@ const enhancer = compose(
   connect(mapStateToProps, mapDispatchToProps),
   withHandleCreateMessage,
   lifecycle({
-    componentDidMount() {
+    async componentDidMount() {
       const {
         chatId,
         fetchMessages,
@@ -69,7 +65,7 @@ const enhancer = compose(
       } = this.props;
 
       navigation.setParams({ participant });
-      fetchMessages(chatId);
+      await fetchMessages(chatId);
     },
   }),
 );

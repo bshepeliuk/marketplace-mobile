@@ -30,7 +30,7 @@ export default handleActions(
       ...state,
       items: {
         ...state.items,
-        [chatId]: [result, ...state.items[chatId]],
+        [chatId]: [result].concat(state.items[chatId] || []),
       },
       sendMessage: {
         ...state.sendMessage,
@@ -44,6 +44,7 @@ export default handleActions(
       const items = state.items[chatId].filter(
         (id) => id !== oldMessageId,
       );
+
       return {
         ...state,
         sendMessage: {

@@ -7,7 +7,7 @@ import NavigationService from '../../services/NavigationService';
 import { colors } from '../../styles';
 import s from './styles';
 
-function ProductImage({ photos, styles }) {
+export function ProductImage({ photos, styles }) {
   const emptyPhoto =
     'https://dummyimage.com/900x700/D6D6D6/fff.png&text=photo+is+empty';
   const uri =
