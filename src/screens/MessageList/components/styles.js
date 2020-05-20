@@ -3,12 +3,6 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../../styles';
 
 const styles = StyleSheet.create({
-  message: {
-    transform: [{ scaleY: -1 }],
-    height: 100,
-    borderWidth: 2,
-    borderColor: colors.primaryGreen,
-  },
   chatInputWrap: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -29,6 +23,47 @@ const styles = StyleSheet.create({
   },
   sendBtn: {
     marginHorizontal: 16,
+  },
+  msgRight: {
+    alignItems: 'flex-end',
+    transform: [{ scaleY: -1 }],
+    marginRight: 8,
+    marginBottom: 8,
+  },
+  msgLeft: {
+    alignItems: 'flex-start',
+    transform: [{ scaleY: -1 }],
+    marginLeft: 8,
+    marginBottom: 8,
+  },
+  myMsg: {
+    backgroundColor: colors.primaryGreen,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    paddingVertical: 8,
+    transform: [{ scaleY: -1 }],
+  },
+  clientMsg: {
+    backgroundColor: colors.white,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.grey,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    paddingVertical: 8,
+    transform: [{ scaleY: -1 }],
+  },
+  myTxt: {
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: 16,
+    lineHeight: 24,
+    color: colors.white,
+  },
+  clientTxt: {
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: 16,
+    lineHeight: 24,
   },
 });
 

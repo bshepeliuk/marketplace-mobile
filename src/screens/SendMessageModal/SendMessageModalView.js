@@ -1,34 +1,69 @@
 import React from 'react';
-import { TextInput, TouchableOpacity } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import {
+  TextInput,
+  TouchableOpacity,
+  View,
+  Text,
+  KeyboardAvoidingView,
+} from 'react-native';
 import T from 'prop-types';
+import GestureRecognizer from 'react-native-swipe-gestures';
 
 import SafeAreaContainer from '../../components/SafeAreaContainer/SafeAreaContainer';
-import { colors } from '../../styles';
+import s from './styles';
+import { globalStyles, colors } from '../../styles';
 
-function SendMessageModalView({ handleChat }) {
+const gestureHandleConfig = {
+  velocityThreshold: 0.3,
+  directionalOffsetThreshold: 80,
+};
+
+function SendMessageModalView({
+  message,
+  setMessage,
+  handleSubmit,
+  handleSwipeDown,
+}) {
   return (
     <SafeAreaContainer>
-      <TextInput
-        placeholder="Message..."
-        multiline
-        style={{ height: 100 }}
-      />
-      <TouchableOpacity onPress={() => handleChat()}>
-        <MaterialIcons
-          name="send"
-          size={30}
-          color={colors.primaryGreen}
-        />
-      </TouchableOpacity>
+      <GestureRecognizer
+        onSwipeDown={handleSwipeDown}
+        config={gestureHandleConfig}
+        style={globalStyles.fillAll}
+      >
+        <View style={s.wrap}>
+          <KeyboardAvoidingView style={s.sendView}>
+            <TextInput
+              placeholder="Message..."
+              onChangeText={setMessage}
+              value={message}
+              style={s.input}
+              multiline
+            />
+            <TouchableOpacity
+              onPress={handleSubmit}
+              style={s.sendBtn}
+            >
+              <Text style={s.btnTxt}>Send</Text>
+            </TouchableOpacity>
+          </KeyboardAvoidingView>
+        </View>
+      </GestureRecognizer>
     </SafeAreaContainer>
   );
 }
 
-SendMessageModalView.navigationOptions = () => {};
+SendMessageModalView.navigationOptions = () => ({
+  cardStyle: {
+    backgroundColor: colors.transparentBlack,
+  },
+});
 
 SendMessageModalView.propTypes = {
-  handleChat: T.func,
+  handleSubmit: T.func,
+  setMessage: T.func,
+  message: T.string,
+  handleSwipeDown: T.func,
 };
 
 export default SendMessageModalView;

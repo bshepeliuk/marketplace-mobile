@@ -162,3 +162,32 @@ export const fetchMoreProducts = () => async (dispatch, getState) => {
     dispatch(actions.moreProducts.error({ message: error.message }));
   }
 };
+
+export const attachChatIdToProduct = (productId, chatId) => async (
+  dispatch,
+  getState,
+) => {
+  const oldProduct = productsSelectors.getProduct(
+    getState(),
+    productId,
+  );
+  const updProduct = { ...oldProduct, chatId };
+  console.log({ productId, chatId });
+  console.log('OLD PRODUCT:', oldProduct);
+  try {
+    dispatch(actions.addChatIdToProduct.start());
+
+    const { result, entities } = normalize(
+      updProduct,
+      schemas.Product,
+    );
+    console.log('ATTACH CHAT ID SUCCESS: ', { result, entities });
+    dispatch(
+      actions.addChatIdToProduct.success({ result, entities }),
+    );
+  } catch (error) {
+    dispatch(
+      actions.addChatIdToProduct.error({ message: error.message }),
+    );
+  }
+};

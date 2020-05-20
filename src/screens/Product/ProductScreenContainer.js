@@ -62,6 +62,15 @@ const enhancer = compose(
       fetchProductOwner(ownerId);
       fetchProduct(productId);
     },
+    componentDidUpdate(prevProps) {
+      const { product, productId, fetchProduct } = this.props;
+      // kindly be advised that fetchChats operation in Inbox Component
+      // rewrite each product and remove chatId
+      // then need to re-fetch product details when user return from MessageList
+      if (!product.chatId && prevProps.product.chatId) {
+        fetchProduct(productId);
+      }
+    },
   }),
 );
 

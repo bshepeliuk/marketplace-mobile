@@ -21,6 +21,13 @@ const enhancer = compose(
 
       fetchChats();
     },
+    componentDidUpdate(prevProps) {
+      const { fetchChats, items } = this.props;
+
+      if (prevProps.items.length !== items.length) {
+        fetchChats();
+      }
+    },
   }),
 );
 

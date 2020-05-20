@@ -13,6 +13,9 @@ function ChatItem({ item }) {
       <View style={s.chatItem}>
         <Text>{item.product.title}</Text>
         <Text>{item.lastMessage && item.lastMessage.text}</Text>
+        <Text>
+          {item.participants && item.participants[0].fullName}
+        </Text>
       </View>
     </TouchableOpacity>
   );

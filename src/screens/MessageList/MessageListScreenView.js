@@ -19,9 +19,9 @@ function MessageListScreenView({
   message,
   fetchMessages,
   isLoading,
+  user,
 }) {
   const hasMore = items.length >= MESSAGE_LIMIT;
-
   return (
     <>
       <FlatList
@@ -30,7 +30,7 @@ function MessageListScreenView({
         keyExtractor={(item) => item.id.toString()}
         refreshing={isLoading}
         onRefresh={() => fetchMessages(chatId)}
-        renderItem={({ item }) => <MessageItem {...{ item }} />}
+        renderItem={({ item }) => <MessageItem {...{ item, user }} />}
         ListFooterComponent={() =>
           isLoadingMore && hasMore && <Loader size="large" />
         }
@@ -51,9 +51,11 @@ function MessageListScreenView({
 }
 
 MessageListScreenView.navigationOptions = ({ navigation }) => {
-  // TODO: need to add participant to header
+  const participant = navigation.getParam('participant');
+  const fullName = participant ? participant.fullName : 'Loading...';
+
   return {
-    title: 'Test',
+    title: fullName,
   };
 };
 
@@ -72,6 +74,9 @@ MessageListScreenView.propTypes = {
   message: T.string,
   isLoading: T.bool,
   fetchMessages: T.func,
+  user: T.shape({
+    id: T.string,
+  }),
 };
 
 export default MessageListScreenView;

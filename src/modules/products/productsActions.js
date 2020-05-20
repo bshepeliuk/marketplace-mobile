@@ -32,3 +32,7 @@ export const moreProducts = createAsyncActions(
   'products/FETCH_MORE_PRODUCTS',
 );
 export const hasNoMore = createAction('products/HAS_NO_MORE');
+
+export const addChatIdToProduct = createAsyncActions(
+  'products/ADD_CHAT_ID_TO_PRODUCT',
+);

@@ -4,10 +4,17 @@ import T from 'prop-types';
 
 import s from '../styles';
 
-function MessageItem({ item }) {
+function MessageItem({ item, user }) {
+  const isItMyMessage = user.id === item.ownerId || false;
+  const msgWrapStlye = isItMyMessage ? s.msgRight : s.msgLeft;
+  const myMsgStyle = isItMyMessage ? s.myMsg : s.clientMsg;
+  const myMsgTxtStyle = isItMyMessage ? s.myTxt : s.clientTxt;
+
   return (
-    <View style={s.message}>
-      <Text style={{ transform: [{ scaleY: -1 }] }}>{item.text}</Text>
+    <View style={msgWrapStlye}>
+      <View style={myMsgStyle}>
+        <Text style={myMsgTxtStyle}>{item.text}</Text>
+      </View>
     </View>
   );
 }
@@ -15,6 +22,10 @@ function MessageItem({ item }) {
 MessageItem.propTypes = {
   item: T.shape({
     text: T.string,
+    ownerId: T.string,
+  }),
+  user: T.shape({
+    id: T.string,
   }),
 };
 

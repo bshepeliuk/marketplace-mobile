@@ -10,6 +10,7 @@ const colors = {
   clouds: 'rgba(236, 240, 241,0.7)',
   lightGreen: '#2ECC71',
   blue: '#3498DB',
+  transparentBlack: 'rgba(44, 62, 80,0.6)',
 };
 
 export default colors;
