@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { Provider } from 'react-redux';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
@@ -10,7 +10,7 @@ import { store, persistor } from './src/store/createStore';
 import { appOperations } from './src/modules/app';
 
 function App() {
-  useEffect(() => {
+  React.useEffect(() => {
     store.dispatch(appOperations.init());
   }, []);
 

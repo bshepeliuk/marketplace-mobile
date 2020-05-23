@@ -1,11 +1,14 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import T from 'prop-types';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, Entypo } from '@expo/vector-icons';
 
 import { ProductImage } from '../../components/Products/ProductItem';
 import s from './styles';
-import { colors } from '../../styles';
+import { colors, globalStyles } from '../../styles';
+import SafeAreaContainer from '../../components/SafeAreaContainer/SafeAreaContainer';
+import ContactWithOwnerNav from './components/ContactWithOwnerNav/ContactWithOwnerNav';
+import Avatar from '../../components/Avatar/Avatar';
 
 function ProductScreenView({
   product,
@@ -14,9 +17,10 @@ function ProductScreenView({
   goBack,
   favoriteSwitcher,
   navigateToSendMessage,
+  handleDialCall,
 }) {
   return (
-    <View style={s.container}>
+    <SafeAreaContainer>
       <TouchableOpacity onPress={goBack} style={s.backBtn}>
         <Ionicons name="ios-arrow-back" size={34} color="white" />
       </TouchableOpacity>
@@ -36,36 +40,54 @@ function ProductScreenView({
           color={product.saved ? colors.primaryGreen : colors.grey}
         />
       </TouchableOpacity>
-      <ProductImage photos={product.photos} styles={s.productImg} />
 
-      {isOwnerLoading ? (
-        <Text>Loading...</Text>
-      ) : (
-        <Text>owner: {owner.fullName}</Text>
-      )}
-      <Text>Product: {product.title}</Text>
-      <Text>Location: {product.location}</Text>
-      <Text>Description: {product.description}</Text>
+      <View style={s.prodDetailWrap}>
+        <ProductImage photos={product.photos} styles={s.productImg} />
+        <View style={s.info}>
+          <View>
+            <Text style={s.productTitle}>{product.title}</Text>
+            <View style={s.locationWrap}>
+              <Entypo
+                name="location-pin"
+                size={18}
+                color={colors.grey}
+              />
+              <Text style={s.location}>{product.location}</Text>
+            </View>
+          </View>
 
-      <View style={s.navBtnWrap}>
-        <TouchableOpacity
-          activeOpacity={0.9}
-          onPress={() => {}}
-          style={s.callBtn}
-        >
-          <Text style={s.btnTxt}>Call</Text>
-          <View style={s.afterCircle} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.9}
-          onPress={() => navigateToSendMessage()}
-          style={s.sendMsgBtn}
-        >
-          <Text style={s.btnTxt}>Message</Text>
-          <View style={s.beforeCircle} />
-        </TouchableOpacity>
+          <Text style={s.price}>${product.price}</Text>
+        </View>
       </View>
-    </View>
+      <View style={globalStyles.fillAll}>
+        <Text style={s.description}>{product.description}</Text>
+      </View>
+
+      <View style={s.aboutOwnerWrap}>
+        <Avatar customStyle={s.avatar} />
+        <View>
+          {isOwnerLoading ? (
+            <Text>Loading...</Text>
+          ) : (
+            <>
+              <Text style={s.owner}>{owner.fullName}</Text>
+            </>
+          )}
+
+          <TouchableOpacity onPress={() => {}}>
+            <Text style={s.morePoducts}>
+              See all posts from current user
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      <ContactWithOwnerNav
+        handleDialCall={handleDialCall}
+        navigateToSendMessage={navigateToSendMessage}
+        owner={owner}
+      />
+    </SafeAreaContainer>
   );
 }
 
@@ -82,13 +104,16 @@ ProductScreenView.propTypes = {
   favoriteSwitcher: T.func,
   navigateToSendMessage: T.func,
   goBack: T.func,
+  handleDialCall: T.func,
   owner: T.shape({
     fullName: T.string,
+    phone: T.string,
   }),
   product: T.shape({
     id: T.string,
     saved: T.bool,
     title: T.string,
+    price: T.number,
     location: T.string,
     description: T.string,
     photos: T.arrayOf(T.string),

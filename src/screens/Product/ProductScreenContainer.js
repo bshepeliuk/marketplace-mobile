@@ -6,6 +6,7 @@ import {
   withHandlers,
   hoistStatics,
 } from 'recompose';
+import { Linking, Platform, Alert } from 'react-native';
 
 import ProductScreenView from './ProductScreenView';
 import {
@@ -35,6 +36,33 @@ const mapDispatchToProps = {
   sendMessage: messagesOperations.sendMessage,
 };
 
+const withDialCall = compose(
+  withHandlers({
+    handleDialCall: () => (telephoneNumber) => {
+      if (!telephoneNumber) {
+        Alert.alert(
+          'Notification',
+          `Unfortunately this user didn't provide his number.`,
+          [{ text: 'OK', onPress: () => {} }],
+          { cancelable: false },
+        );
+
+        return;
+      }
+
+      let phoneNumber;
+
+      if (Platform.OS === 'android') {
+        phoneNumber = `tel:${telephoneNumber}`;
+      } else {
+        phoneNumber = `telprompt:${telephoneNumber}`;
+      }
+
+      Linking.openURL(phoneNumber);
+    },
+  }),
+);
+
 const enhancer = compose(
   withProps((props) => ({
     productId: props.navigation.getParam('productId'),
@@ -42,6 +70,7 @@ const enhancer = compose(
   })),
   connect(mapStateToProps, mapDispatchToProps),
   withFavoriteSwitcher, // return favoriteSwitcher fn
+  withDialCall, // return handleDialCall method in which we pass a phone number
   withHandlers({
     goBack: () => () => {
       NavigationService.goBack();

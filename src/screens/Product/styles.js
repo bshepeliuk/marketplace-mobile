@@ -1,6 +1,15 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../../styles';
 
+const txtStyle = {
+  fontStyle: 'normal',
+  fontWeight: 'normal',
+  fontSize: 16,
+  lineHeight: 24,
+
+  color: colors.black,
+};
+
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -12,15 +21,15 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   productImg: {
-    height: 356,
+    height: 456,
   },
   navBtnWrap: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'flex-end',
-    flexGrow: 1,
     position: 'relative',
     bottom: 0,
+    marginBottom: -54, // remove default tab bar height
   },
   callBtn: {
     backgroundColor: colors.lightGreen,
@@ -62,6 +71,74 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     color: colors.white,
     textAlignVertical: 'center',
+  },
+  prodDetailWrap: {
+    position: 'relative',
+    top: 0,
+    left: 0,
+  },
+  info: {
+    position: 'absolute',
+    bottom: 0,
+    flexDirection: 'row',
+    paddingHorizontal: 16,
+    paddingBottom: 20,
+    width: '100%',
+    justifyContent: 'space-between',
+  },
+  productTitle: {
+    color: colors.white,
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 16,
+    lineHeight: 24,
+  },
+  locationWrap: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  location: {
+    color: colors.white,
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: 16,
+    lineHeight: 24,
+    textAlign: 'center',
+    marginLeft: 3,
+  },
+  price: {
+    color: colors.white,
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 16,
+    lineHeight: 24,
+  },
+  aboutOwnerWrap: {
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.grey,
+    height: 64,
+    marginVertical: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  description: {
+    paddingHorizontal: 16,
+    marginTop: 8,
+    ...txtStyle,
+  },
+  owner: {
+    ...txtStyle,
+  },
+  morePoducts: {
+    ...txtStyle,
+    color: colors.blue,
+  },
+  avatar: {
+    marginHorizontal: 16,
+    height: 48,
+    width: 48,
+    borderRadius: 50,
+    backgroundColor: colors.primaryGreen,
   },
 });
 

@@ -9,7 +9,7 @@ import s from './styles';
 
 export function ProductImage({ photos, styles }) {
   const emptyPhoto =
-    'https://dummyimage.com/900x700/D6D6D6/fff.png&text=photo+is+empty';
+    'https://dummyimage.com/900x700/1abc9c/fff.png&text=photo+is+empty';
   const uri =
     photos && photos.length > 0 && photos[0] ? photos[0] : emptyPhoto;
 
