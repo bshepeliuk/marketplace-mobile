@@ -61,8 +61,6 @@ BrowseScreenView.propTypes = {
   fetchMoreProducts: T.func,
   fetchLatestProducts: T.func,
   favoriteSwitcher: T.func,
-  // handleSearch: T.func,
-  // handleReset: T.func,
   handleChange: T.func,
 };
 

@@ -8,7 +8,7 @@ function SafeAreaContainer(props) {
 
   const safeAreaStyles = {
     paddingTop: insets.top,
-    paddingBottom: 54, // tab bar height
+    paddingBottom: props.bottom || 54, // tab bar height
     flexGrow: 1,
   };
 
@@ -17,6 +17,7 @@ function SafeAreaContainer(props) {
 
 SafeAreaContainer.propTypes = {
   children: T.oneOfType([T.arrayOf(T.element), T.element]),
+  bottom: T.number,
 };
 
 export default SafeAreaContainer;

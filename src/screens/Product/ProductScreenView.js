@@ -1,11 +1,16 @@
-import { Text, TouchableOpacity, View } from 'react-native';
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  ScrollView,
+} from 'react-native';
 import React from 'react';
 import T from 'prop-types';
 import { Ionicons, Entypo } from '@expo/vector-icons';
 
 import { ProductImage } from '../../components/Products/ProductItem';
 import s from './styles';
-import { colors, globalStyles } from '../../styles';
+import { colors } from '../../styles';
 import SafeAreaContainer from '../../components/SafeAreaContainer/SafeAreaContainer';
 import ContactWithOwnerNav from './components/ContactWithOwnerNav/ContactWithOwnerNav';
 import Avatar from '../../components/Avatar/Avatar';
@@ -18,6 +23,7 @@ function ProductScreenView({
   favoriteSwitcher,
   navigateToSendMessage,
   handleDialCall,
+  goToSellerProducts,
 }) {
   return (
     <SafeAreaContainer>
@@ -59,12 +65,16 @@ function ProductScreenView({
           <Text style={s.price}>${product.price}</Text>
         </View>
       </View>
-      <View style={globalStyles.fillAll}>
+      <ScrollView style={s.descWrap}>
         <Text style={s.description}>{product.description}</Text>
-      </View>
+      </ScrollView>
 
       <View style={s.aboutOwnerWrap}>
-        <Avatar customStyle={s.avatar} />
+        <Avatar
+          customStyle={s.avatar}
+          fullName={owner.fullName}
+          photo={owner.avatar}
+        />
         <View>
           {isOwnerLoading ? (
             <Text>Loading...</Text>
@@ -74,7 +84,7 @@ function ProductScreenView({
             </>
           )}
 
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={goToSellerProducts}>
             <Text style={s.morePoducts}>
               See all posts from current user
             </Text>
@@ -91,9 +101,12 @@ function ProductScreenView({
   );
 }
 
-ProductScreenView.navigationOptions = {
+ProductScreenView.navigationOptions = () => ({
   headerShown: false,
-};
+  cardStyle: {
+    backgroundColor: colors.white,
+  },
+});
 
 ProductScreenView.defaultProps = {
   owner: {},
@@ -102,12 +115,14 @@ ProductScreenView.defaultProps = {
 ProductScreenView.propTypes = {
   isOwnerLoading: T.bool,
   favoriteSwitcher: T.func,
+  goToSellerProducts: T.func,
   navigateToSendMessage: T.func,
   goBack: T.func,
   handleDialCall: T.func,
   owner: T.shape({
     fullName: T.string,
     phone: T.string,
+    avatar: T.string,
   }),
   product: T.shape({
     id: T.string,

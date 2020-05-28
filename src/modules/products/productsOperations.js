@@ -136,6 +136,24 @@ export const fetchOwnProducts = (userId) => async (dispatch) => {
   }
 };
 
+export const fetchSellerProducts = (sellerId) => async (dispatch) => {
+  try {
+    dispatch(actions.sellerProducts.start());
+
+    const { data } = await Api.Products.getUserProducts(sellerId);
+    const { result, entities } = normalize(
+      data.list,
+      schemas.ProductList,
+    );
+
+    dispatch(actions.sellerProducts.success({ result, entities }));
+  } catch (error) {
+    dispatch(
+      actions.sellerProducts.error({ message: error.message }),
+    );
+  }
+};
+
 export const fetchMoreProducts = () => async (dispatch, getState) => {
   const {
     items,
@@ -172,8 +190,7 @@ export const attachChatIdToProduct = (productId, chatId) => async (
     productId,
   );
   const updProduct = { ...oldProduct, chatId };
-  console.log({ productId, chatId });
-  console.log('OLD PRODUCT:', oldProduct);
+
   try {
     dispatch(actions.addChatIdToProduct.start());
 
@@ -181,7 +198,7 @@ export const attachChatIdToProduct = (productId, chatId) => async (
       updProduct,
       schemas.Product,
     );
-    console.log('ATTACH CHAT ID SUCCESS: ', { result, entities });
+
     dispatch(
       actions.addChatIdToProduct.success({ result, entities }),
     );

@@ -1,8 +1,9 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import T from 'prop-types';
 
 import ChatItem from './components/Chat/ChatItem';
+import { colors } from '../../styles';
 
 function InboxScreenView({ items, isLoading, fetchChats }) {
   return (
@@ -17,6 +18,16 @@ function InboxScreenView({ items, isLoading, fetchChats }) {
     </>
   );
 }
+
+InboxScreenView.navigationOptions = () => ({
+  headerStyle: {
+    elevation: 0, // remove shadow on Android
+    shadowOpacity: 0, // remove shadow on iOS
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: colors.grey,
+  },
+  headerTitleAlign: 'center',
+});
 
 InboxScreenView.propTypes = {
   fetchChats: T.func,

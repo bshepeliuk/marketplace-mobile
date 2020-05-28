@@ -138,7 +138,12 @@ const styles = StyleSheet.create({
     height: 48,
     width: 48,
     borderRadius: 50,
-    backgroundColor: colors.primaryGreen,
+    backgroundColor: colors.grey,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  descWrap: {
+    height: 72,
   },
 });
 

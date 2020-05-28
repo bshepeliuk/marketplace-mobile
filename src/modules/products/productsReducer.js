@@ -35,6 +35,12 @@ export const INIT_STATE = {
     error: null,
     items: [],
   },
+  sellerProducts: {
+    isError: false,
+    isLoading: false,
+    error: null,
+    items: [],
+  },
 };
 
 export default handleActions(
@@ -234,6 +240,34 @@ export default handleActions(
       ...state,
       ownProducts: {
         ...state.ownProducts,
+        isLoading: false,
+        isError: true,
+        error: action.payload,
+      },
+    }),
+    // seller products
+    [actions.sellerProducts.start]: (state) => ({
+      ...state,
+      sellerProducts: {
+        ...state.sellerProducts,
+        isLoading: true,
+      },
+    }),
+    [actions.sellerProducts.success]: (
+      state,
+      { payload: { result } },
+    ) => ({
+      ...state,
+      sellerProducts: {
+        ...state.sellerProducts,
+        isLoading: false,
+        items: result,
+      },
+    }),
+    [actions.sellerProducts.error]: (state, action) => ({
+      ...state,
+      sellerProducts: {
+        ...state.sellerProducts,
         isLoading: false,
         isError: true,
         error: action.payload,

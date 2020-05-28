@@ -4,18 +4,29 @@ import T from 'prop-types';
 
 import { NavigationService } from '../../../../services';
 import s from '../styles';
+import Avatar from '../../../../components/Avatar/Avatar';
 
 function ChatItem({ item }) {
+  const { fullName, avatar } =
+    item.participants && item.participants[0];
+
   return (
     <TouchableOpacity
       onPress={() => NavigationService.navigateToChat(item.id)}
     >
       <View style={s.chatItem}>
-        <Text>{item.product.title}</Text>
-        <Text>{item.lastMessage && item.lastMessage.text}</Text>
-        <Text>
-          {item.participants && item.participants[0].fullName}
-        </Text>
+        <Avatar
+          photo={avatar}
+          fullName={fullName}
+          customStyle={s.avatar}
+        />
+        <View>
+          <Text style={s.title}>{item.product.title}</Text>
+          <Text style={s.fullName}>{fullName}</Text>
+          <Text style={s.lastMessage}>
+            {item.lastMessage && item.lastMessage.text}
+          </Text>
+        </View>
       </View>
     </TouchableOpacity>
   );

@@ -41,6 +41,9 @@ SavedScreenView.navigationOptions = () => ({
 });
 
 SavedScreenView.propTypes = {
+  handleSubmit: T.func,
+  setTouched: T.func,
+  touched: T.object,
   products: T.arrayOf(
     T.shape({
       title: T.string,

@@ -80,6 +80,13 @@ class NavigationService {
       params: { product },
     });
   }
+
+  navigateToSellerProducts({ ownerId }) {
+    this.navigate({
+      routeName: screens.SellerProducts,
+      params: { ownerId },
+    });
+  }
 }
 
 export default new NavigationService();

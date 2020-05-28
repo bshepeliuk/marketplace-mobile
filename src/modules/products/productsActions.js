@@ -28,6 +28,10 @@ export const userProducts = createAsyncActions(
   'products/FETCH_USER_PRODUCTS',
 );
 
+export const sellerProducts = createAsyncActions(
+  'products/FETCH_SELLER_PRODUCTS',
+);
+
 export const moreProducts = createAsyncActions(
   'products/FETCH_MORE_PRODUCTS',
 );

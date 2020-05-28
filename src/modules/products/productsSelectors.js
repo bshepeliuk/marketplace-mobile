@@ -4,8 +4,9 @@ const getProductsEntities = (state) => state.entities.products;
 const getUsersEntities = (state) => state.entities.users;
 const getlatestIds = (state) => state.products.latestProducts.items;
 const getSavedIds = (state) => state.products.savedProducts.items;
-const getSetOwnProductsIds = (state) =>
-  state.products.ownProducts.items;
+const getOwnProductsIds = (state) => state.products.ownProducts.items;
+const getSellerProductsIds = (state) =>
+  state.products.sellerProducts.items;
 
 export const getLatest = createSelector(
   [getProductsEntities, getlatestIds],
@@ -38,7 +39,14 @@ export const getSavedProducts = createSelector(
 );
 
 export const getOwnProducts = createSelector(
-  [getProductsEntities, getSetOwnProductsIds],
+  [getProductsEntities, getOwnProductsIds],
+  (entities, ids) => {
+    return ids.map((id) => entities[id]);
+  },
+);
+
+export const getSellerProducts = createSelector(
+  [getProductsEntities, getSellerProductsIds],
   (entities, ids) => {
     return ids.map((id) => entities[id]);
   },

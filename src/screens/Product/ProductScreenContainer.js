@@ -78,6 +78,11 @@ const enhancer = compose(
     navigateToSendMessage: ({ product }) => () => {
       NavigationService.navigateToSendMessageModal({ product });
     },
+    goToSellerProducts: ({ ownerId, owner }) => () => {
+      NavigationService.navigateToSellerProducts({
+        ownerId: ownerId || owner.id,
+      });
+    },
   }),
   lifecycle({
     componentDidMount() {
